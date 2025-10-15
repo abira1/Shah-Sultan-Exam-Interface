@@ -408,6 +408,128 @@ export function ListeningTest({ examId, audioRef }) {
     const questionNum = question.index;
 
     switch (question.type) {
+      // NEW QTI LISTENING TYPES (10 types)
+      case 'fill_in_the_gaps':
+        return (
+          <div key={question.id}>
+            <FillInTheGaps
+              question={question}
+              answer={answers[questionNum]}
+              onAnswerChange={handleAnswerChange}
+              onFocus={setCurrentQuestionIndex}
+            />
+          </div>
+        );
+
+      case 'fill_in_the_gaps_short_answers':
+        return (
+          <div key={question.id}>
+            <FillInTheGapsShortAnswers
+              question={question}
+              answer={answers[questionNum]}
+              onAnswerChange={handleAnswerChange}
+              onFocus={setCurrentQuestionIndex}
+            />
+          </div>
+        );
+
+      case 'flowchart_completion_listening':
+        return (
+          <div key={question.id}>
+            <FlowchartCompletionListening
+              question={question}
+              answer={answers[questionNum]}
+              onAnswerChange={handleAnswerChange}
+              onFocus={setCurrentQuestionIndex}
+            />
+          </div>
+        );
+
+      case 'form_completion':
+        return (
+          <div key={question.id}>
+            <FormCompletion
+              question={question}
+              answer={answers[questionNum]}
+              onAnswerChange={handleAnswerChange}
+              onFocus={setCurrentQuestionIndex}
+            />
+          </div>
+        );
+
+      case 'labelling_on_a_map':
+        return (
+          <div key={question.id}>
+            <LabellingOnAMap
+              question={question}
+              answer={answers[questionNum]}
+              onAnswerChange={handleAnswerChange}
+              onFocus={setCurrentQuestionIndex}
+            />
+          </div>
+        );
+
+      case 'matching_listening':
+        return (
+          <div key={question.id}>
+            <MatchingListening
+              question={question}
+              answer={answers[questionNum]}
+              onAnswerChange={handleAnswerChange}
+              onFocus={setCurrentQuestionIndex}
+            />
+          </div>
+        );
+
+      case 'multiple_choice_more_than_one_answer_listening':
+        return (
+          <div key={question.id}>
+            <MultipleChoiceMoreThanOneAnswerListening
+              question={question}
+              answer={answers[questionNum]}
+              onAnswerChange={handleAnswerChange}
+              onFocus={setCurrentQuestionIndex}
+            />
+          </div>
+        );
+
+      case 'multiple_choice_one_answer_listening':
+        return (
+          <div key={question.id}>
+            <MultipleChoiceOneAnswerListening
+              question={question}
+              answer={answers[questionNum]}
+              onAnswerChange={handleAnswerChange}
+              onFocus={setCurrentQuestionIndex}
+            />
+          </div>
+        );
+
+      case 'sentence_completion_listening':
+        return (
+          <div key={question.id}>
+            <SentenceCompletionListening
+              question={question}
+              answer={answers[questionNum]}
+              onAnswerChange={handleAnswerChange}
+              onFocus={setCurrentQuestionIndex}
+            />
+          </div>
+        );
+
+      case 'table_completion_listening':
+        return (
+          <div key={question.id}>
+            <TableCompletionListening
+              question={question}
+              answer={answers[questionNum]}
+              onAnswerChange={handleAnswerChange}
+              onFocus={setCurrentQuestionIndex}
+            />
+          </div>
+        );
+
+      // LEGACY/OLD TYPES (for backward compatibility with existing tests)
       case 'short_answer':
         return (
           <div 
@@ -600,88 +722,12 @@ export function ListeningTest({ examId, audioRef }) {
           </div>
         );
 
-      case 'form_completion':
+      default:
         return (
-          <div 
-            key={question.id} 
-            className="mb-4" 
-            data-question-index={questionNum}
-            onClick={() => setCurrentQuestionIndex(questionNum)}
-          >
-            <FormCompletion
-              question={question}
-              answer={answers[questionNum]}
-              onChange={handleAnswerChange}
-              questionNum={questionNum}
-            />
-          </div>
-        );
-
-      case 'note_completion':
-        return (
-          <div 
-            key={question.id} 
-            className="mb-4" 
-            data-question-index={questionNum}
-            onClick={() => setCurrentQuestionIndex(questionNum)}
-          >
-            <NoteCompletion
-              question={question}
-              answer={answers[questionNum]}
-              onChange={handleAnswerChange}
-              questionNum={questionNum}
-            />
-          </div>
-        );
-
-      case 'table_completion':
-        return (
-          <div 
-            key={question.id} 
-            className="mb-4" 
-            data-question-index={questionNum}
-            onClick={() => setCurrentQuestionIndex(questionNum)}
-          >
-            <TableCompletion
-              question={question}
-              answer={answers[questionNum]}
-              onChange={handleAnswerChange}
-              questionNum={questionNum}
-            />
-          </div>
-        );
-
-      case 'flowchart_completion':
-        return (
-          <div 
-            key={question.id} 
-            className="mb-4" 
-            data-question-index={questionNum}
-            onClick={() => setCurrentQuestionIndex(questionNum)}
-          >
-            <FlowchartCompletion
-              question={question}
-              answer={answers[questionNum]}
-              onChange={handleAnswerChange}
-              questionNum={questionNum}
-            />
-          </div>
-        );
-
-      case 'summary_completion':
-        return (
-          <div 
-            key={question.id} 
-            className="mb-4" 
-            data-question-index={questionNum}
-            onClick={() => setCurrentQuestionIndex(questionNum)}
-          >
-            <SummaryCompletion
-              question={question}
-              answer={answers[questionNum]}
-              onChange={handleAnswerChange}
-              questionNum={questionNum}
-            />
+          <div key={question.id} className="mb-4 p-4 border border-yellow-400 bg-yellow-50 rounded">
+            <p className="text-sm text-gray-700">
+              <span className="font-semibold">Question {questionNum}:</span> Unsupported question type "{question.type}"
+            </p>
           </div>
         );
 
