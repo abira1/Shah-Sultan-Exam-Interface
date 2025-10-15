@@ -562,19 +562,88 @@ async def create_submission(
         if not is_writing_test:
             for question in all_questions:
                 question_index = str(question["index"])
-                student_answer = submission_data.answers.get(question_index, "").strip().lower()
+                student_answer_raw = submission_data.answers.get(question_index, "")
+                q_type = question["type"]
                 
                 # Check if question has answer_key
-                if "answer_key" in question.get("payload", {}):
-                    correct_answer = str(question["payload"]["answer_key"]).strip().lower()
-                    
-                    # For short answer questions, do case-insensitive comparison
-                    if question["type"] in ["short_answer", "diagram_labeling", "sentence_completion", "short_answer_reading", "sentence_completion_wordlist"]:
-                        if student_answer == correct_answer:
+                if "answer_key" not in question.get("payload", {}):
+                    continue
+                
+                correct_answer = question["payload"]["answer_key"]
+                
+                # Skip writing types (manual grading only)
+                if q_type in ["writing_part_1", "writing_part_2"]:
+                    continue
+                
+                # TEXT INPUT TYPES - Case-insensitive string comparison
+                text_input_types = [
+                    "fill_in_the_gaps", 
+                    "fill_in_the_gaps_short_answers",
+                    "flowchart_completion_listening",
+                    "form_completion",
+                    "labelling_on_a_map",
+                    "sentence_completion_listening",
+                    "table_completion_listening",
+                    "flowchart_completion_selecting_words_from_text",
+                    "note_completion",
+                    "sentence_completion_reading",
+                    "summary_completion_selecting_words_from_text",
+                    "table_completion_reading"
+                ]
+                
+                if q_type in text_input_types:
+                    student_answer = str(student_answer_raw).strip().lower()
+                    correct_answer_str = str(correct_answer).strip().lower()
+                    if student_answer == correct_answer_str:
+                        correct_count += 1
+                
+                # SINGLE CHOICE RADIO TYPES - Exact letter match
+                single_choice_types = [
+                    "multiple_choice_one_answer_listening",
+                    "multiple_choice_one_answer_reading",
+                    "identifying_information_true_false_not_given"
+                ]
+                
+                if q_type in single_choice_types:
+                    student_answer = str(student_answer_raw).strip().upper()
+                    correct_answer_str = str(correct_answer).strip().upper()
+                    if student_answer == correct_answer_str:
+                        correct_count += 1
+                
+                # MULTIPLE CHOICE CHECKBOX TYPES - Array comparison
+                multiple_choice_types = [
+                    "multiple_choice_more_than_one_answer_listening",
+                    "multiple_choice_more_than_one_answer_reading"
+                ]
+                
+                if q_type in multiple_choice_types:
+                    # Student answer should be array/list
+                    student_answers = student_answer_raw if isinstance(student_answer_raw, list) else [student_answer_raw]
+                    correct_answers = correct_answer if isinstance(correct_answer, list) else [correct_answer]
+                    # Normalize and compare sets
+                    student_set = set(str(a).strip().upper() for a in student_answers if a)
+                    correct_set = set(str(a).strip().upper() for a in correct_answers if a)
+                    if student_set == correct_set:
+                        correct_count += 1
+                
+                # DROPDOWN SELECTION TYPES - Exact match (letters or roman numerals)
+                dropdown_types = [
+                    "matching_listening",
+                    "matching_features",
+                    "matching_headings",
+                    "matching_sentence_endings",
+                    "summary_completion_selecting_from_list"
+                ]
+                
+                if q_type in dropdown_types:
+                    student_answer = str(student_answer_raw).strip()
+                    correct_answer_str = str(correct_answer).strip()
+                    # For headings, keep case-sensitive (i, ii, iii); for others, case-insensitive
+                    if q_type == "matching_headings":
+                        if student_answer == correct_answer_str:
                             correct_count += 1
-                    # For multiple choice and map labeling, exact match
-                    elif question["type"] in ["multiple_choice", "map_labeling", "matching_paragraphs", "true_false_not_given"]:
-                        if student_answer == correct_answer:
+                    else:
+                        if student_answer.upper() == correct_answer_str.upper():
                             correct_count += 1
         
         # Calculate score (out of total questions) - writing tests get 0 until manually graded
