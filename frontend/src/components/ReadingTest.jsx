@@ -457,6 +457,52 @@ export function ReadingTest({ examId }) {
         return <TableCompletion question={question} answer={answer} onChange={(idx, val) => handleAnswerChange(idx, val)} questionNum={question.index} />;
       case 'matching_features':
         return <MatchingFeatures question={question} answer={answer} onChange={(idx, val) => handleAnswerChange(idx, val)} questionNum={question.index} />;
+      
+      // QTI Reading Question Types
+      case 'flowchart_completion_words_from_text':
+      case 'flowchart_completion_selecting_words':
+        return <FlowchartCompletionSelectingWordsFromText question={question} answer={answer} onAnswerChange={handleAnswerChange} onFocus={setCurrentQuestionIndex} />;
+      
+      case 'identifying_information':
+      case 'identifying_information_true_false_not_given':
+        return <IdentifyingInformationTrueFalseNotGiven question={question} answer={answer} onAnswerChange={handleAnswerChange} onFocus={setCurrentQuestionIndex} />;
+      
+      case 'matching_features_qti':
+        return <MatchingFeaturesQTI question={question} answer={answer} onAnswerChange={handleAnswerChange} onFocus={setCurrentQuestionIndex} />;
+      
+      case 'matching_headings_qti':
+        return <MatchingHeadingsQTI question={question} answer={answer} onAnswerChange={handleAnswerChange} onFocus={setCurrentQuestionIndex} />;
+      
+      case 'matching_sentence_endings_qti':
+        return <MatchingSentenceEndingsQTI question={question} answer={answer} onAnswerChange={handleAnswerChange} onFocus={setCurrentQuestionIndex} />;
+      
+      case 'multiple_choice_more_than_one_answer':
+      case 'multiple_choice_multiple_answers':
+        return <MultipleChoiceMoreThanOneAnswerReading question={question} answer={answer} onAnswerChange={handleAnswerChange} onFocus={setCurrentQuestionIndex} />;
+      
+      case 'multiple_choice_one_answer':
+      case 'multiple_choice_single_answer':
+        return <MultipleChoiceOneAnswerReading question={question} answer={answer} onAnswerChange={handleAnswerChange} onFocus={setCurrentQuestionIndex} />;
+      
+      case 'note_completion_qti':
+        return <NoteCompletionQTI question={question} answer={answer} onAnswerChange={handleAnswerChange} onFocus={setCurrentQuestionIndex} />;
+      
+      case 'sentence_completion_qti':
+      case 'sentence_completion_reading':
+        return <SentenceCompletionReading question={question} answer={answer} onAnswerChange={handleAnswerChange} onFocus={setCurrentQuestionIndex} />;
+      
+      case 'summary_completion_selecting_from_list':
+      case 'summary_completion_list_qti':
+        return <SummaryCompletionSelectingFromList question={question} answer={answer} onAnswerChange={handleAnswerChange} onFocus={setCurrentQuestionIndex} />;
+      
+      case 'summary_completion_selecting_words_from_text':
+      case 'summary_completion_words_from_text':
+        return <SummaryCompletionSelectingWordsFromText question={question} answer={answer} onAnswerChange={handleAnswerChange} onFocus={setCurrentQuestionIndex} />;
+      
+      case 'table_completion_qti':
+      case 'table_completion_reading_qti':
+        return <TableCompletionReading question={question} answer={answer} onAnswerChange={handleAnswerChange} onFocus={setCurrentQuestionIndex} />;
+      
       case 'matching_draggable':
         // Handle matching draggable questions with multiple sub-questions
         const questions = question.payload?.questions || [];
