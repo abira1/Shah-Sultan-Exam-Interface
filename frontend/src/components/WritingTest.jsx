@@ -410,82 +410,95 @@ export function WritingTest({ examId }) {
 
       {/* Main Content - Horizontal Split Layout */}
       <main className="flex-1 flex pb-[60px]" style={{ paddingTop: isHeaderHidden ? '80px' : '136px' }} id="highlightable-content">
-        {/* Left Side: Task Prompt - 40% width */}
-        <div className="w-[40%] bg-white border-r-2 border-gray-300 overflow-y-auto">
-          <div className="p-8">
-            <div className="mb-6">
-              <h1 className="text-3xl font-bold text-gray-800 mb-2">
-                Writing Task {currentQuestion?.payload?.task_number}
-              </h1>
-              <div className="text-sm text-gray-600 italic">
-                {currentQuestion?.payload?.instructions}
+        {/* Check if we should use QTI component */}
+        {(currentQuestion?.type === 'writing_part_1' || currentQuestion?.type === 'writing_part_2') ? (
+          /* QTI Writing Component Layout */
+          <div className="w-full overflow-y-auto">
+            <div className="max-w-4xl mx-auto p-8">
+              {renderQuestionComponent(currentQuestion)}
+            </div>
+          </div>
+        ) : (
+          /* Legacy writing_task Layout */
+          <>
+            {/* Left Side: Task Prompt - 40% width */}
+            <div className="w-[40%] bg-white border-r-2 border-gray-300 overflow-y-auto">
+              <div className="p-8">
+                <div className="mb-6">
+                  <h1 className="text-3xl font-bold text-gray-800 mb-2">
+                    Writing Task {currentQuestion?.payload?.task_number}
+                  </h1>
+                  <div className="text-sm text-gray-600 italic">
+                    {currentQuestion?.payload?.instructions}
+                  </div>
+                </div>
+
+                {/* Task Prompt */}
+                <div className="mb-6 p-5 bg-blue-50 rounded-lg border-l-4 border-blue-500">
+                  <div className="text-gray-800 leading-relaxed whitespace-pre-wrap">
+                    {currentQuestion?.payload?.prompt}
+                  </div>
+                </div>
+
+                {/* Chart Image (only for Task 1) */}
+                {currentQuestion?.payload?.chart_image && (
+                  <div className="mb-6 flex justify-center">
+                    <img 
+                      src={currentQuestion.payload.chart_image} 
+                      alt="Chart for Writing Task" 
+                      className="max-w-full h-auto rounded-lg shadow-lg border border-gray-200"
+                      style={{ maxHeight: '600px' }}
+                    />
+                  </div>
+                )}
+
+                {/* Minimum Word Count Notice */}
+                <div className="mt-6 p-4 bg-yellow-50 border-l-4 border-yellow-400 rounded">
+                  <p className="text-sm text-gray-700">
+                    <strong>Note:</strong> Write at least <strong className="text-yellow-700">{minWords} words</strong> for this task.
+                  </p>
+                </div>
               </div>
             </div>
 
-            {/* Task Prompt */}
-            <div className="mb-6 p-5 bg-blue-50 rounded-lg border-l-4 border-blue-500">
-              <div className="text-gray-800 leading-relaxed whitespace-pre-wrap">
-                {currentQuestion?.payload?.prompt}
-              </div>
-            </div>
+            {/* Right Side: Writing Area - 50% width */}
+            <div className="w-[50%] bg-gray-50 overflow-y-auto">
+              <div className="p-8">
+                <div className="mb-4">
+                  <h2 className="text-xl font-semibold text-gray-700">Your Response</h2>
+                </div>
 
-            {/* Chart Image (only for Task 1) */}
-            {currentQuestion?.payload?.chart_image && (
-              <div className="mb-6 flex justify-center">
-                <img 
-                  src={currentQuestion.payload.chart_image} 
-                  alt="Chart for Writing Task" 
-                  className="max-w-full h-auto rounded-lg shadow-lg border border-gray-200"
-                  style={{ maxHeight: '600px' }}
+                {/* Writing Area */}
+                <textarea
+                  value={answers[currentQuestion?.index] || ''}
+                  onChange={(e) => handleAnswerChange(currentQuestion?.index, e.target.value)}
+                  className="w-full h-[calc(100vh-350px)] p-6 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none font-sans text-base leading-relaxed resize-none bg-white shadow-inner"
+                  placeholder="Start writing your answer here..."
+                  disabled={examFinished}
+                  style={{ minHeight: '500px' }}
                 />
+
+                {/* Word Counter - Below Textarea */}
+                <div className={`mt-3 text-base font-semibold ${isWordCountSufficient ? 'text-green-600' : 'text-orange-600'}`}>
+                  Word count: {currentWordCount} / {minWords}
+                </div>
+
+                {/* Submit Button for Task 2 */}
+                {currentTaskIndex === allQuestions.length - 1 && (
+                  <div className="mt-6">
+                    <button
+                      onClick={handleSubmitExam}
+                      disabled={isSubmitting}
+                      className="w-full px-8 py-4 bg-green-600 text-white rounded-lg font-bold text-lg hover:bg-green-700 transition-colors disabled:bg-gray-400 shadow-lg"
+                    >
+                      {isSubmitting ? 'Submitting...' : 'Submit Test'}
+                    </button>
+                  </div>
+                )}
               </div>
-            )}
-
-            {/* Minimum Word Count Notice */}
-            <div className="mt-6 p-4 bg-yellow-50 border-l-4 border-yellow-400 rounded">
-              <p className="text-sm text-gray-700">
-                <strong>Note:</strong> Write at least <strong className="text-yellow-700">{minWords} words</strong> for this task.
-              </p>
             </div>
-          </div>
-        </div>
-
-        {/* Right Side: Writing Area - 50% width */}
-        <div className="w-[50%] bg-gray-50 overflow-y-auto">
-          <div className="p-8">
-            <div className="mb-4">
-              <h2 className="text-xl font-semibold text-gray-700">Your Response</h2>
-            </div>
-
-            {/* Writing Area */}
-            <textarea
-              value={answers[currentQuestion?.index] || ''}
-              onChange={(e) => handleAnswerChange(currentQuestion?.index, e.target.value)}
-              className="w-full h-[calc(100vh-350px)] p-6 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none font-sans text-base leading-relaxed resize-none bg-white shadow-inner"
-              placeholder="Start writing your answer here..."
-              disabled={examFinished}
-              style={{ minHeight: '500px' }}
-            />
-
-            {/* Word Counter - Below Textarea */}
-            <div className={`mt-3 text-base font-semibold ${isWordCountSufficient ? 'text-green-600' : 'text-orange-600'}`}>
-              Word count: {currentWordCount} / {minWords}
-            </div>
-
-            {/* Submit Button for Task 2 */}
-            {currentTaskIndex === allQuestions.length - 1 && (
-              <div className="mt-6">
-                <button
-                  onClick={handleSubmitExam}
-                  disabled={isSubmitting}
-                  className="w-full px-8 py-4 bg-green-600 text-white rounded-lg font-bold text-lg hover:bg-green-700 transition-colors disabled:bg-gray-400 shadow-lg"
-                >
-                  {isSubmitting ? 'Submitting...' : 'Submit Test'}
-                </button>
-              </div>
-            )}
-          </div>
-        </div>
+          </>
+        )}
       </main>
 
       {/* QTI-Style Footer Navigation with 2 Task Buttons */}
