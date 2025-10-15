@@ -5,13 +5,20 @@ import FirebaseAuthService from '../services/FirebaseAuthService';
 import { useAuth } from '../contexts/AuthContext';
 import { Clock, Volume2, ChevronLeft, ChevronRight, HelpCircle, EyeOff, User } from 'lucide-react';
 import HighlightManager from '../lib/HighlightManager';
+// Legacy components (keeping for backward compatibility)
 import { MatchingDraggable } from './questions/MatchingDraggable';
 import { MultipleChoiceMultiple } from './questions/MultipleChoiceMultiple';
-import { FormCompletion } from './questions/FormCompletion';
-import { NoteCompletion } from './questions/NoteCompletion';
-import { TableCompletion } from './questions/TableCompletion';
-import { FlowchartCompletion } from './questions/FlowchartCompletion';
-import { SummaryCompletion } from './questions/SummaryCompletion';
+// New QTI Listening Components
+import FillInTheGaps from './qti/listening/FillInTheGaps';
+import FillInTheGapsShortAnswers from './qti/listening/FillInTheGapsShortAnswers';
+import FlowchartCompletionListening from './qti/listening/FlowchartCompletionListening';
+import FormCompletion from './qti/listening/FormCompletion';
+import LabellingOnAMap from './qti/listening/LabellingOnAMap';
+import MatchingListening from './qti/listening/MatchingListening';
+import MultipleChoiceMoreThanOneAnswerListening from './qti/listening/MultipleChoiceMoreThanOneAnswerListening';
+import MultipleChoiceOneAnswerListening from './qti/listening/MultipleChoiceOneAnswerListening';
+import SentenceCompletionListening from './qti/listening/SentenceCompletionListening';
+import TableCompletionListening from './qti/listening/TableCompletionListening';
 import '../styles/navigation.css';
 
 export function ListeningTest({ examId, audioRef }) {
