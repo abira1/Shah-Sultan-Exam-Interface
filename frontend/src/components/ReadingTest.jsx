@@ -17,6 +17,19 @@ import { FlowchartCompletion } from './questions/FlowchartCompletion';
 import { MatchingSentenceEndings } from './questions/MatchingSentenceEndings';
 import { TableCompletion } from './questions/TableCompletion';
 import { MatchingFeatures } from './questions/MatchingFeatures';
+// QTI Reading Components
+import FlowchartCompletionSelectingWordsFromText from './qti/reading/FlowchartCompletionSelectingWordsFromText';
+import IdentifyingInformationTrueFalseNotGiven from './qti/reading/IdentifyingInformationTrueFalseNotGiven';
+import MatchingFeaturesQTI from './qti/reading/MatchingFeatures';
+import MatchingHeadingsQTI from './qti/reading/MatchingHeadings';
+import MatchingSentenceEndingsQTI from './qti/reading/MatchingSentenceEndings';
+import MultipleChoiceMoreThanOneAnswerReading from './qti/reading/MultipleChoiceMoreThanOneAnswerReading';
+import MultipleChoiceOneAnswerReading from './qti/reading/MultipleChoiceOneAnswerReading';
+import NoteCompletionQTI from './qti/reading/NoteCompletion';
+import SentenceCompletionReading from './qti/reading/SentenceCompletionReading';
+import SummaryCompletionSelectingFromList from './qti/reading/SummaryCompletionSelectingFromList';
+import SummaryCompletionSelectingWordsFromText from './qti/reading/SummaryCompletionSelectingWordsFromText';
+import TableCompletionReading from './qti/reading/TableCompletionReading';
 import HighlightManager from '../lib/HighlightManager';
 import '../styles/navigation.css';
 
