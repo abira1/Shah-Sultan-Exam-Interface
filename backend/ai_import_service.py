@@ -69,9 +69,10 @@ class QuestionImport(BaseModel):
 
     @validator('answer_key')
     def validate_answer_key(cls, v, values):
-        """Answer key required for all types except writing_task"""
+        """Answer key required for all types except writing types"""
         q_type = values.get('type')
-        if q_type == 'writing_task':
+        # Writing types don't need answer keys (manual grading)
+        if q_type in ['writing_part_1', 'writing_part_2']:
             return None
         if not v:
             raise ValueError(f"answer_key is required for question type '{q_type}'")
