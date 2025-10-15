@@ -730,13 +730,6 @@ export function ListeningTest({ examId, audioRef }) {
             </p>
           </div>
         );
-
-      default:
-        return (
-          <div key={question.id} className="mb-4" data-question-index={questionNum}>
-            <p className="text-gray-500">Question type not supported: {question.type}</p>
-          </div>
-        );
     }
   };
 
