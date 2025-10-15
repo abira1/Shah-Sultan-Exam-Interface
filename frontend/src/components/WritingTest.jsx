@@ -5,6 +5,9 @@ import FirebaseAuthService from '../services/FirebaseAuthService';
 import { useAuth } from '../contexts/AuthContext';
 import { Clock, User, HelpCircle, EyeOff } from 'lucide-react';
 import HighlightManager from '../lib/HighlightManager';
+// QTI Writing Components
+import WritingPart1 from './qti/writing/WritingPart1';
+import WritingPart2 from './qti/writing/WritingPart2';
 import '../styles/navigation.css';
 
 export function WritingTest({ examId }) {
