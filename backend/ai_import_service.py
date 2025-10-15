@@ -17,30 +17,55 @@ router = APIRouter()
 # ============================================
 
 class QuestionImport(BaseModel):
-    """Individual question in the import"""
+    """Individual question in the import - ALL 24 QTI Question Types"""
     index: int = Field(..., ge=1, description="Question number (1-40 for L/R, 1-2 for W)")
     type: Literal[
-        "short_answer",
-        "multiple_choice",
-        "map_labeling",
-        "diagram_labeling",
-        "true_false_not_given",
-        "matching_paragraphs",
-        "sentence_completion",
-        "sentence_completion_wordlist",
-        "short_answer_reading",
-        "writing_task"
+        # LISTENING TYPES (10)
+        "fill_in_the_gaps",
+        "fill_in_the_gaps_short_answers",
+        "flowchart_completion_listening",
+        "form_completion",
+        "labelling_on_a_map",
+        "matching_listening",
+        "multiple_choice_more_than_one_answer_listening",
+        "multiple_choice_one_answer_listening",
+        "sentence_completion_listening",
+        "table_completion_listening",
+        
+        # READING TYPES (12)
+        "flowchart_completion_selecting_words_from_text",
+        "identifying_information_true_false_not_given",
+        "matching_features",
+        "matching_headings",
+        "matching_sentence_endings",
+        "multiple_choice_more_than_one_answer_reading",
+        "multiple_choice_one_answer_reading",
+        "note_completion",
+        "sentence_completion_reading",
+        "summary_completion_selecting_from_list",
+        "summary_completion_selecting_words_from_text",
+        "table_completion_reading",
+        
+        # WRITING TYPES (2)
+        "writing_part_1",
+        "writing_part_2"
     ]
     prompt: str = Field(..., min_length=1, description="Question text")
-    answer_key: Optional[str] = Field(None, description="Correct answer (null for writing)")
+    answer_key: Optional[Any] = Field(None, description="Correct answer (string, list, or null for writing)")
     max_words: Optional[int] = Field(None, ge=1, le=10, description="Max words allowed")
     min_words: Optional[int] = Field(None, ge=50, le=500, description="Min words required (writing)")
-    options: Optional[List[str]] = Field(None, description="Multiple choice options")
-    image_url: Optional[str] = Field(None, description="URL for map/diagram images")
-    wordlist: Optional[List[str]] = Field(None, description="Word list for completion")
+    options: Optional[List[Dict[str, str]]] = Field(None, description="Multiple choice options [{value:'A', text:'...'}]")
+    image_url: Optional[str] = Field(None, description="URL for map/diagram/flowchart images")
+    word_list: Optional[List[str]] = Field(None, description="Word bank for summary completion")
+    headings: Optional[List[Dict[str, str]]] = Field(None, description="Headings for matching [{value:'i', text:'...'}]")
+    features: Optional[List[Dict[str, str]]] = Field(None, description="Features for matching [{value:'A', text:'...'}]")
+    endings: Optional[List[Dict[str, str]]] = Field(None, description="Sentence endings [{value:'A', text:'...'}]")
     task_number: Optional[int] = Field(None, ge=1, le=2, description="Writing task number")
     chart_image: Optional[str] = Field(None, description="Chart image for writing task 1")
     instructions: Optional[str] = Field(None, description="Task instructions (writing)")
+    table_data: Optional[Dict[str, Any]] = Field(None, description="Table structure for completion questions")
+    form_fields: Optional[List[Dict[str, Any]]] = Field(None, description="Form fields for form_completion")
+    max_choices: Optional[int] = Field(None, ge=2, le=5, description="Number of choices for multiple answer questions")
 
     @validator('answer_key')
     def validate_answer_key(cls, v, values):
