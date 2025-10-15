@@ -305,6 +305,31 @@ export function WritingTest({ examId }) {
     );
   }
 
+  // Render question component based on type
+  const renderQuestionComponent = (question) => {
+    if (!question) return null;
+    
+    const answer = answers[question.index] || '';
+    const onAnswerChange = (questionIndex, value) => handleAnswerChange(questionIndex, value);
+    const onFocus = (questionIndex) => {
+      const taskIdx = allQuestions.findIndex(q => q.index === questionIndex);
+      if (taskIdx !== -1) setCurrentTaskIndex(taskIdx);
+    };
+
+    switch (question.type) {
+      case 'writing_part_1':
+        return <WritingPart1 question={question} answer={answer} onAnswerChange={onAnswerChange} onFocus={onFocus} />;
+      
+      case 'writing_part_2':
+        return <WritingPart2 question={question} answer={answer} onAnswerChange={onAnswerChange} onFocus={onFocus} />;
+      
+      case 'writing_task':
+      default:
+        // Legacy writing_task type - render default layout
+        return null; // Will be handled by the existing JSX layout
+    }
+  };
+
   const isFinalTwoMinutes = timeRemaining <= 120 && timeRemaining > 0;
   const currentWordCount = getWordCount(answers[currentQuestion?.index]);
   const minWords = currentQuestion?.payload?.min_words || 150;
