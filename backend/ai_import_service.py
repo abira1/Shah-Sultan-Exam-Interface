@@ -154,16 +154,19 @@ class QuestionImport(BaseModel):
 
     @validator('type', pre=True)
     def normalize_question_type(cls, v):
-        """Convert legacy type names to QTI standard names"""
-        if v in LEGACY_TYPE_MAPPING:
-            return LEGACY_TYPE_MAPPING[v]
-        return v
-    
-    @validator('type')
-    def validate_question_type(cls, v):
-        """Ensure type is valid after normalization"""
+        """Convert legacy type names to QTI standard names with smart normalization"""
+        if not v:
+            raise ValueError("Question type is required")
+        
+        # Normalize input: lowercase, strip, replace spaces/hyphens with underscores
+        v_normalized = v.lower().strip().replace(' ', '_').replace('-', '_')
+        
+        # Check direct match in legacy mapping first
+        if v_normalized in LEGACY_TYPE_MAPPING:
+            return LEGACY_TYPE_MAPPING[v_normalized]
+        
+        # Check if already valid QTI type
         valid_types = {
-            # LISTENING TYPES (10)
             "fill_in_the_gaps",
             "fill_in_the_gaps_short_answers",
             "flowchart_completion_listening",
@@ -174,7 +177,6 @@ class QuestionImport(BaseModel):
             "multiple_choice_one_answer_listening",
             "sentence_completion_listening",
             "table_completion_listening",
-            # READING TYPES (12)
             "flowchart_completion_selecting_words_from_text",
             "identifying_information_true_false_not_given",
             "matching_features",
@@ -187,12 +189,32 @@ class QuestionImport(BaseModel):
             "summary_completion_selecting_from_list",
             "summary_completion_selecting_words_from_text",
             "table_completion_reading",
-            # WRITING TYPES (2)
             "writing_part_1",
             "writing_part_2"
         }
-        if v not in valid_types:
-            raise ValueError(f"Invalid question type: '{v}'. Must be one of: {', '.join(sorted(valid_types))}")
+        
+        if v_normalized in valid_types:
+            return v_normalized
+        
+        # If not found, provide helpful error with suggestions
+        suggestions = get_close_matches(v_normalized, valid_types, n=3, cutoff=0.6)
+        
+        error_msg = f"Invalid question type: '{v}'."
+        
+        if suggestions:
+            error_msg += f" Did you mean: {', '.join(suggestions)}?"
+        else:
+            # Show legacy mapping options if no close matches
+            legacy_options = list(LEGACY_TYPE_MAPPING.keys())[:10]  # Show first 10 as examples
+            error_msg += f" Example valid types: {', '.join(legacy_options)}..."
+        
+        error_msg += " See documentation for complete list of 24 supported question types."
+        
+        raise ValueError(error_msg)
+    
+    @validator('type')
+    def validate_question_type_final(cls, v):
+        """Final validation - should not fail if normalize_question_type worked correctly"""
         return v
     
     @validator('options', pre=True)
