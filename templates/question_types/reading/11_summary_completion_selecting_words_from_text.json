@@ -1,0 +1,42 @@
+{
+  "_comment_type": "Question Type: Summary Completion Selecting Words From Text",
+  "_comment_description": "Students complete a summary by selecting appropriate words directly from the reading passage.",
+  "_comment_use_case": "Reading Passage 1/2/3, summary completion using passage vocabulary",
+  
+  "_required_fields": [
+    "index", "type", "prompt", "answer_key"
+  ],
+  
+  "_optional_fields": [
+    "max_words", "instructions"
+  ],
+  
+  "index": 24,
+  "type": "summary_completion_selecting_words_from_text",
+  "prompt": "Complete the summary using words from the passage. Write NO MORE THAN TWO WORDS for each answer.\n\nThe study revealed that _____ is the primary cause of habitat destruction. This has led to a significant decline in _____ populations across the region.",
+  "answer_key": ["urban development", "wildlife"],
+  "max_words": 2,
+  
+  "_field_descriptions": {
+    "index": "Question number (sequential, unique per test)",
+    "type": "Exact type name - must be 'summary_completion_selecting_words_from_text'",
+    "prompt": "Summary with blanks and instruction to use passage words",
+    "answer_key": "Array of exact words/phrases from passage for each blank",
+    "max_words": "Maximum words per blank (default: 2, range: 1-3)"
+  },
+  
+  "_validation_rules": {
+    "answer_key": "Array of exact words/phrases that appear in the passage",
+    "max_words": "Integer 1-3, commonly 2 for summary completion",
+    "passage_verification": "All answers must exist in the reading passage",
+    "summary_coherence": "Answers must make summary coherent and accurate"
+  },
+  
+  "_grading": {
+    "method": "exact_text_match_from_passage",
+    "case_sensitive": false,
+    "must_be_in_passage": true,
+    "word_limit_enforced": true,
+    "context_sensitive": "Answer must fit summary context"
+  }
+}

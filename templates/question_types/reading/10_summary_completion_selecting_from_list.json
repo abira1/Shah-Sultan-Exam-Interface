@@ -1,0 +1,47 @@
+{
+  "_comment_type": "Question Type: Summary Completion Selecting From List",
+  "_comment_description": "Students complete a summary by selecting appropriate words from a provided word bank/list.",
+  "_comment_use_case": "Reading Passage 2/3, summary completion with limited word choices",
+  
+  "_required_fields": [
+    "index", "type", "prompt", "answer_key", "word_list"
+  ],
+  
+  "_optional_fields": [
+    "instructions"
+  ],
+  
+  "index": 23,
+  "type": "summary_completion_selecting_from_list",
+  "prompt": "Complete the summary below. Choose your answers from the box below the summary.\n\nClimate change affects many aspects of life. Rising temperatures cause _____ to melt, leading to higher sea levels. This threatens coastal _____. Meanwhile, changing weather patterns affect _____ production worldwide.\n\nWord Bank:\nA. glaciers  B. communities  C. agriculture  D. forests  E. mountains  F. industries",
+  "answer_key": "A",
+  "word_list": ["glaciers", "communities", "agriculture", "forests", "mountains", "industries"],
+  
+  "_field_descriptions": {
+    "index": "Question number (sequential, unique per test)",
+    "type": "Exact type name - must be 'summary_completion_selecting_from_list'",
+    "prompt": "Summary with blanks and word bank below",
+    "answer_key": "Word from the list that fills the blank (can be letter or word)",
+    "word_list": "Array of available words to choose from"
+  },
+  
+  "_validation_rules": {
+    "answer_key": "Must match one item from word_list (letter or word)",
+    "word_list": "Array of strings, typically 6-10 words for 3-6 blanks",
+    "word_usage": "Each word typically used only once across all blanks"
+  },
+  
+  "_grading": {
+    "method": "exact_match_from_list",
+    "case_sensitive": false,
+    "accepts_letter_or_word": "Both 'A' and 'glaciers' acceptable",
+    "must_be_from_list": true
+  },
+  
+  "_word_bank_guidelines": {
+    "word_count": "Usually 6-10 words for 3-6 blanks (some distractors)",
+    "word_types": "Mix of nouns, verbs, adjectives relevant to passage topic",
+    "difficulty": "Some obvious fits, some requiring careful consideration",
+    "distractors": "Plausible but incorrect words from passage topic"
+  }
+}
