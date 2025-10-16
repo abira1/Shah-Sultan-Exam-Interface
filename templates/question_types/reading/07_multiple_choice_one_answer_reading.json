@@ -1,0 +1,42 @@
+{
+  "_comment_type": "Question Type: Multiple Choice One Answer Reading",
+  "_comment_description": "Students select one correct answer from multiple options based on the reading passage.",
+  "_comment_use_case": "Reading Passage 1/2/3, main ideas, specific details, inference questions",
+  
+  "_required_fields": [
+    "index", "type", "prompt", "answer_key", "options"
+  ],
+  
+  "_optional_fields": [
+    "instructions"
+  ],
+  
+  "index": 20,
+  "type": "multiple_choice_one_answer_reading",
+  "prompt": "According to the passage, what is the main benefit of renewable energy?",
+  "answer_key": "B",
+  "options": [
+    {"value": "A", "text": "It is cheaper than fossil fuels"},
+    {"value": "B", "text": "It reduces environmental impact"},
+    {"value": "C", "text": "It creates more jobs"},
+    {"value": "D", "text": "It is easier to implement"}
+  ],
+  
+  "_field_descriptions": {
+    "index": "Question number (sequential, unique per test)",
+    "type": "Exact type name - must be 'multiple_choice_one_answer_reading'",
+    "prompt": "Question asking for one answer from the options",
+    "answer_key": "Single letter of the correct option",
+    "options": "Array of all available choices"
+  },
+  
+  "_validation_rules": {
+    "answer_key": "Single string matching one option value",
+    "options": "Typically 3-4 options for single-answer questions"
+  },
+  
+  "_grading": {
+    "method": "exact_match",
+    "case_sensitive": false
+  }
+}

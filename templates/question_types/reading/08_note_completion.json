@@ -1,0 +1,40 @@
+{
+  "_comment_type": "Question Type: Note Completion",
+  "_comment_description": "Students complete notes by filling in missing information from the reading passage.",
+  "_comment_use_case": "Reading Passage 1/2/3, completing notes, summaries, or outlines",
+  
+  "_required_fields": [
+    "index", "type", "prompt", "answer_key"
+  ],
+  
+  "_optional_fields": [
+    "max_words", "instructions"
+  ],
+  
+  "index": 21,
+  "type": "note_completion",
+  "prompt": "Complete the notes below. Choose NO MORE THAN TWO WORDS from the passage for each answer.\n\nRenewable Energy Sources:\n• Solar: uses _____ to generate electricity\n• Wind: requires _____ locations\n• Hydro: depends on _____ flow",
+  "answer_key": ["solar panels", "windy", "water"],
+  "max_words": 2,
+  
+  "_field_descriptions": {
+    "index": "Question number (sequential, unique per test)",
+    "type": "Exact type name - must be 'note_completion'",
+    "prompt": "Note structure with blanks and word limit instruction",
+    "answer_key": "Array of words/phrases from passage to complete notes",
+    "max_words": "Maximum words per blank (default: 2, range: 1-3)"
+  },
+  
+  "_validation_rules": {
+    "answer_key": "Array of exact words/phrases from the passage",
+    "max_words": "Integer 1-3, commonly 2 for note completion",
+    "passage_verification": "All answers must appear in the reading passage"
+  },
+  
+  "_grading": {
+    "method": "exact_text_match_from_passage",
+    "case_sensitive": false,
+    "must_be_in_passage": true,
+    "word_limit_enforced": true
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "_comment_type": "Question Type: Sentence Completion Reading",
+  "_comment_description": "Students complete sentences using words from the reading passage within specified word limits.",
+  "_comment_use_case": "Reading Passage 1/2/3, sentence completion with passage words",
+  
+  "_required_fields": [
+    "index", "type", "prompt", "answer_key"
+  ],
+  
+  "_optional_fields": [
+    "max_words", "instructions"
+  ],
+  
+  "index": 22,
+  "type": "sentence_completion_reading", 
+  "prompt": "Complete the sentence below. Choose NO MORE than THREE WORDS from the passage.\n\nThe new technology will help reduce _____ in urban areas.",
+  "answer_key": "air pollution",
+  "max_words": 3,
+  
+  "_field_descriptions": {
+    "index": "Question number (sequential, unique per test)",
+    "type": "Exact type name - must be 'sentence_completion_reading'",
+    "prompt": "Incomplete sentence with word limit from passage",
+    "answer_key": "Exact words/phrases from passage to complete sentence",
+    "max_words": "Maximum words allowed (default: 3, range: 1-5)"
+  },
+  
+  "_validation_rules": {
+    "answer_key": "String of exact words that appear in the passage",
+    "max_words": "Integer 1-5, commonly 2-3 for sentence completion",
+    "passage_verification": "Answer must exist in the reading passage",
+    "grammatical_fit": "Answer must complete sentence grammatically"
+  },
+  
+  "_grading": {
+    "method": "exact_text_match_from_passage",
+    "case_sensitive": false,
+    "must_be_in_passage": true,
+    "word_limit_enforced": true,
+    "grammar_sensitive": "Answer must fit grammatically in sentence"
+  }
+}
