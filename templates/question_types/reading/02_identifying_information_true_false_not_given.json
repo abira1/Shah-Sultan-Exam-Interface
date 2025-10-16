@@ -1,0 +1,52 @@
+{
+  "_comment_type": "Question Type: TRUE/FALSE/NOT GIVEN",
+  "_comment_description": "Students determine if statements agree with, contradict, or are not mentioned in the passage.",
+  "_comment_use_case": "Reading Passage 1/2/3, factual accuracy, comprehension testing",
+  
+  "_required_fields": [
+    "index", "type", "prompt", "answer_key", "options"
+  ],
+  
+  "_optional_fields": [
+    "instructions"
+  ],
+  
+  "index": 15,
+  "type": "identifying_information_true_false_not_given",
+  "prompt": "The company was founded in 1990.",
+  "answer_key": "TRUE",
+  "options": [
+    {"value": "TRUE", "text": "TRUE"},
+    {"value": "FALSE", "text": "FALSE"},
+    {"value": "NOT GIVEN", "text": "NOT GIVEN"}
+  ],
+  
+  "_field_descriptions": {
+    "index": "Question number (sequential, unique per test)",
+    "type": "Exact type name - must be 'identifying_information_true_false_not_given'",
+    "prompt": "Statement to evaluate against the passage",
+    "answer_key": "TRUE, FALSE, or NOT GIVEN",
+    "options": "Fixed array of three options"
+  },
+  
+  "_validation_rules": {
+    "answer_key": "Must be exactly 'TRUE', 'FALSE', or 'NOT GIVEN'",
+    "options": "Must be the standard three-option format"
+  },
+  
+  "_grading": {
+    "method": "exact_match",
+    "case_sensitive": false,
+    "answer_logic": {
+      "TRUE": "Statement agrees with information in passage",
+      "FALSE": "Statement contradicts information in passage", 
+      "NOT GIVEN": "Information not provided in passage"
+    }
+  },
+  
+  "_decision_guidelines": {
+    "TRUE": "Information clearly stated or can be inferred from passage",
+    "FALSE": "Information directly contradicts what's stated in passage",
+    "NOT GIVEN": "Information not mentioned or cannot be determined from passage"
+  }
+}

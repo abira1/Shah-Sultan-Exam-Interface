@@ -1,0 +1,42 @@
+{
+  "_comment_type": "Question Type: Matching Features",
+  "_comment_description": "Students match features, characteristics, or items to people, places, or categories mentioned in the passage.",
+  "_comment_use_case": "Reading Passage 2/3, matching people to opinions, places to characteristics, items to categories",
+  
+  "_required_fields": [
+    "index", "type", "prompt", "answer_key", "features"
+  ],
+  
+  "_optional_fields": [
+    "instructions"
+  ],
+  
+  "index": 16,
+  "type": "matching_features",
+  "prompt": "Which scientist made the following discovery?",
+  "answer_key": "B",
+  "features": [
+    {"value": "A", "text": "Dr. Johnson"},
+    {"value": "B", "text": "Prof. Smith"},
+    {"value": "C", "text": "Dr. Williams"},
+    {"value": "D", "text": "Prof. Brown"}
+  ],
+  
+  "_field_descriptions": {
+    "index": "Question number (sequential, unique per test)",
+    "type": "Exact type name - must be 'matching_features'",
+    "prompt": "Question asking which feature/person matches the item",
+    "answer_key": "Letter corresponding to correct feature", 
+    "features": "Array of people/places/categories to match from"
+  },
+  
+  "_validation_rules": {
+    "answer_key": "Single letter matching one feature value",
+    "features": "Array of objects with 'value' (letter) and 'text' (name/description)"
+  },
+  
+  "_grading": {
+    "method": "exact_match",
+    "case_sensitive": false
+  }
+}
