@@ -219,12 +219,37 @@ class QuestionImport(BaseModel):
     
     @validator('options', pre=True)
     def normalize_options(cls, v):
-        """Convert string arrays to dict arrays for TRUE/FALSE/NOT GIVEN questions"""
+        """Auto-convert any option format to standard dict array"""
         if v is None:
             return None
-        # If options is a list of strings, convert to list of dicts
-        if isinstance(v, list) and len(v) > 0 and isinstance(v[0], str):
+        
+        # Already correct format (list of dicts with value/text)
+        if isinstance(v, list) and v and isinstance(v[0], dict) and 'value' in v[0]:
+            return v
+        
+        # String array → Dict array (most common case)
+        if isinstance(v, list) and v and isinstance(v[0], str):
             return [{"value": opt, "text": opt} for opt in v]
+        
+        # Single string → Dict array
+        if isinstance(v, str):
+            return [{"value": v, "text": v}]
+        
+        # Dict without proper structure → Try to fix
+        if isinstance(v, list) and v and isinstance(v[0], dict):
+            result = []
+            for item in v:
+                if 'value' in item and 'text' in item:
+                    result.append(item)
+                elif 'value' in item:
+                    result.append({"value": item['value'], "text": str(item['value'])})
+                elif len(item) >= 1:
+                    # Take first key-value pair
+                    key = list(item.keys())[0]
+                    value = item[key]
+                    result.append({"value": key, "text": str(value)})
+            return result if result else None
+        
         return v
     
     @validator('word_list')
