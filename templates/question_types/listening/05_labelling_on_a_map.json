@@ -1,0 +1,72 @@
+{
+  "_comment_type": "Question Type: Labelling on a Map",
+  "_comment_description": "Students label locations on a map based on directions and descriptions from the listening.",
+  "_comment_use_case": "Listening Section 2, campus tours, city directions, facility locations",
+  
+  "_required_fields": [
+    "index", "type", "prompt", "answer_key"
+  ],
+  
+  "_optional_fields": [
+    "image_url", "instructions"
+  ],
+  
+  "index": 5,
+  "type": "labelling_on_a_map",
+  "prompt": "Label the map below. Choose your answers from the box.\n\nA. Library\nB. Cafeteria\nC. Gym\nD. Student Centre\nE. Car Park\nF. Bookshop",
+  "answer_key": "C",
+  "image_url": "https://example.com/campus-map-with-arrows.png",
+  
+  "_field_descriptions": {
+    "index": "Question number (sequential, unique per test)",
+    "type": "Exact type name - must be 'labelling_on_a_map'",
+    "prompt": "Instructions and available location options",
+    "answer_key": "Letter/option corresponding to correct location",
+    "image_url": "URL to map image with numbered locations to label"
+  },
+  
+  "_validation_rules": {
+    "answer_key": "Single letter/option (A, B, C, etc.) or location name",
+    "prompt": "Should include available options or word bank",
+    "image_url": "Strongly recommended for map questions"
+  },
+  
+  "_grading": {
+    "method": "exact_match",
+    "case_sensitive": false,
+    "accepts_full_names": "Both 'C' and 'Gym' acceptable if clear"
+  },
+  
+  "_map_features": {
+    "typical_locations": [
+      "Library", "Cafeteria", "Gym", "Student Centre", "Car Park",
+      "Bookshop", "Reception", "Lecture Hall", "Computer Lab", "Health Centre"
+    ],
+    "numbering": "Locations marked with numbers (1, 2, 3...) or arrows",
+    "format": "Clear map with identifiable buildings/areas"
+  },
+  
+  "_examples": [
+    {
+      "scenario": "University Campus",
+      "options": ["Library", "Sports Hall", "Cafeteria", "Administration", "Parking"],
+      "answer_key": "Library"
+    },
+    {
+      "scenario": "Shopping Centre",
+      "options": ["A. Supermarket", "B. Pharmacy", "C. Bank", "D. Restaurant"],
+      "answer_key": "B"
+    },
+    {
+      "scenario": "City Centre",
+      "options": ["Museum", "Park", "Station", "Hospital", "Post Office"],
+      "answer_key": "Station"
+    }
+  ],
+  
+  "_audio_clues": {
+    "direction_words": ["next to", "opposite", "behind", "in front of", "between"],
+    "location_phrases": ["on the left", "to the right", "at the end", "in the corner"],
+    "distance_markers": ["nearby", "close to", "far from", "adjacent to"]
+  }
+}
