@@ -1,0 +1,50 @@
+{
+  "_comment_type": "Question Type: Fill in the Gaps Short Answers",
+  "_comment_description": "Students fill in multiple missing words in a passage or form. Multiple blanks with individual answers.",
+  "_comment_use_case": "Listening Section 1, form completion with multiple fields",
+  
+  "_required_fields": [
+    "index", "type", "prompt", "answer_key"
+  ],
+  
+  "_optional_fields": [
+    "max_words", "instructions"
+  ],
+  
+  "index": 2,
+  "type": "fill_in_the_gaps_short_answers",
+  "prompt": "Complete the notes below.\n\nStudent Information:\nName: _____\nAge: _____\nNationality: _____\nCourse: _____",
+  "answer_key": ["John Smith", "25", "Canadian", "Business Studies"],
+  "max_words": 2,
+  
+  "_field_descriptions": {
+    "index": "Question number (sequential, unique per test)",
+    "type": "Exact type name - must be 'fill_in_the_gaps_short_answers'",
+    "prompt": "Question text with multiple _____ blanks or clear field structure",
+    "answer_key": "Array of correct answers in order [answer1, answer2, ...]",
+    "max_words": "Maximum words per blank (default: 3, range: 1-5)"
+  },
+  
+  "_validation_rules": {
+    "answer_key": "Array of strings, each answer corresponds to one blank",
+    "max_words": "Integer 1-5, applies to each individual blank",
+    "prompt": "Should contain multiple blanks or clear field structure"
+  },
+  
+  "_grading": {
+    "method": "case_insensitive_exact_match_per_field",
+    "accepts_variations": "Case insensitive for each field",
+    "array_order": "Answers must be in correct order matching blanks"
+  },
+  
+  "_examples": [
+    {
+      "prompt": "Name: _____ Phone: _____ Email: _____",
+      "answer_key": ["Sarah Wilson", "555-0123", "sarah@email.com"]
+    },
+    {
+      "prompt": "Complete the form:\n\nAddress: _____\nCity: _____\nPostcode: _____",
+      "answer_key": ["123 Main Street", "London", "SW1A 1AA"]
+    }
+  ]
+}
