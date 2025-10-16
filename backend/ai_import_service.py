@@ -18,22 +18,115 @@ router = APIRouter()
 
 # Legacy type name mapping for backward compatibility
 LEGACY_TYPE_MAPPING = {
-    # Legacy reading types -> QTI types
+    # ============ READING TYPE VARIATIONS ============
+    # TRUE/FALSE/NOT GIVEN variations
     "true_false_not_given": "identifying_information_true_false_not_given",
     "yes_no_not_given": "identifying_information_true_false_not_given",
+    "tfng": "identifying_information_true_false_not_given",
+    "ynng": "identifying_information_true_false_not_given",
+    "identifying_information": "identifying_information_true_false_not_given",
+    "true_false": "identifying_information_true_false_not_given",
+    "yes_no": "identifying_information_true_false_not_given",
+    
+    # Sentence completion variations
     "short_answer_reading": "sentence_completion_reading",
-    "sentence_completion_wordlist": "summary_completion_selecting_from_list",
+    "short_answer": "sentence_completion_reading",
+    "sentence_completion": "sentence_completion_reading",
+    "complete_sentences": "sentence_completion_reading",
+    
+    # Matching headings variations
     "matching_headings_reading": "matching_headings",
+    "heading_matching": "matching_headings",
+    "match_headings": "matching_headings",
+    "paragraph_headings": "matching_headings",
+    
+    # Matching features variations
     "matching_features_reading": "matching_features",
+    "feature_matching": "matching_features",
+    "match_features": "matching_features",
+    
+    # Matching sentence endings variations
     "matching_sentence_endings_reading": "matching_sentence_endings",
+    "sentence_endings": "matching_sentence_endings",
+    "match_endings": "matching_sentence_endings",
+    
+    # Summary completion variations
     "summary_completion": "summary_completion_selecting_from_list",
+    "summary_list": "summary_completion_selecting_from_list",
+    "summary_from_list": "summary_completion_selecting_from_list",
+    "summary_text": "summary_completion_selecting_words_from_text",
+    "summary_from_text": "summary_completion_selecting_words_from_text",
+    "summary_from_passage": "summary_completion_selecting_words_from_text",
+    "sentence_completion_wordlist": "summary_completion_selecting_from_list",
+    
+    # Table completion variations
     "table_completion": "table_completion_reading",
+    "complete_table": "table_completion_reading",
+    "table_reading": "table_completion_reading",
+    
+    # Note completion variations
     "note_completion_reading": "note_completion",
+    "complete_notes": "note_completion",
+    "notes": "note_completion",
+    
+    # Flowchart variations
     "flowchart_completion": "flowchart_completion_selecting_words_from_text",
-    # Legacy listening types
-    "short_answer": "fill_in_the_gaps_short_answers",
+    "flowchart": "flowchart_completion_selecting_words_from_text",
+    "flowchart_reading": "flowchart_completion_selecting_words_from_text",
+    
+    # Multiple choice variations
+    "multiple_choice_reading": "multiple_choice_one_answer_reading",
+    "mcq_reading": "multiple_choice_one_answer_reading",
+    "multiple_choice_multiple_reading": "multiple_choice_more_than_one_answer_reading",
+    "mcq_multiple_reading": "multiple_choice_more_than_one_answer_reading",
+    
+    # ============ LISTENING TYPE VARIATIONS ============
+    # Fill in the gaps variations
+    "fill_gaps": "fill_in_the_gaps",
+    "fill_blank": "fill_in_the_gaps",
+    "gap_fill": "fill_in_the_gaps",
+    "short_answer_listening": "fill_in_the_gaps_short_answers",
+    
+    # Form completion variations
+    "form": "form_completion",
+    "complete_form": "form_completion",
+    "form_filling": "form_completion",
+    
+    # Map labeling variations
+    "labelling_map": "labelling_on_a_map",
+    "map_labeling": "labelling_on_a_map",
+    "label_map": "labelling_on_a_map",
+    "map": "labelling_on_a_map",
+    
+    # Matching variations
+    "matching": "matching_listening",
+    "match_listening": "matching_listening",
+    
+    # Multiple choice variations
     "multiple_choice_listening": "multiple_choice_one_answer_listening",
-    "sentence_completion": "sentence_completion_listening",
+    "mcq_listening": "multiple_choice_one_answer_listening",
+    "multiple_choice_multiple_listening": "multiple_choice_more_than_one_answer_listening",
+    
+    # Sentence completion variations
+    "sentence_completion_listening": "sentence_completion_listening",
+    "complete_sentences_listening": "sentence_completion_listening",
+    
+    # Table completion variations
+    "table_completion_listening": "table_completion_listening",
+    "table_listening": "table_completion_listening",
+    
+    # Flowchart variations
+    "flowchart_listening": "flowchart_completion_listening",
+    "flowchart_completion_listen": "flowchart_completion_listening",
+    
+    # ============ WRITING TYPE VARIATIONS ============
+    "writing_task_1": "writing_part_1",
+    "writing_1": "writing_part_1",
+    "task_1": "writing_part_1",
+    "writing_task_2": "writing_part_2",
+    "writing_2": "writing_part_2",
+    "task_2": "writing_part_2",
+    "writing_task": "writing_part_1",  # Default to part 1 if ambiguous
 }
 
 class QuestionImport(BaseModel):
