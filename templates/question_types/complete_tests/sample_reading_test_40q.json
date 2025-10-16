@@ -1,0 +1,105 @@
+{
+  "test_type": "reading",
+  "title": "IELTS Reading Practice Test - Complete Example",
+  "description": "Complete reading test with all 12 question types demonstrated across 40 questions",
+  "duration_seconds": 3600,
+  "audio_url": null,
+  "sections": [
+    {
+      "index": 1,
+      "title": "Passage 1: Ancient Civilizations",
+      "instructions": "Questions 1-13",
+      "passage_text": "A\nAlthough humans have established many types of societies throughout history, ancient civilizations represent some of the most fascinating examples of human organization and achievement. These early societies developed complex systems of governance, agriculture, and culture that laid the foundation for modern civilization.\n\nB\nThe Mesopotamian civilization, often considered the birthplace of civilization, emerged around 3500 BCE in the region between the Tigris and Euphrates rivers. This society developed the world's first writing system, cuneiform, which revolutionized communication and record-keeping. The Mesopotamians also created the wheel, established the first cities, and developed sophisticated irrigation systems that allowed agriculture to flourish in an otherwise arid region.\n\nC\nSimilarly, ancient Egypt emerged as a powerful civilization along the Nile River around 3100 BCE. The predictable flooding of the Nile provided fertile soil that supported a stable agricultural economy. This stability allowed Egyptian society to develop remarkable achievements in architecture, mathematics, and medicine. The construction of the pyramids demonstrates their advanced understanding of engineering and mathematics, while their mummification practices reveal sophisticated knowledge of human anatomy and preservation techniques.",
+      "questions": [
+        {
+          "index": 1,
+          "type": "identifying_information_true_false_not_given",
+          "prompt": "Mesopotamian civilization developed the first writing system.",
+          "answer_key": "TRUE",
+          "options": [
+            {"value": "TRUE", "text": "TRUE"},
+            {"value": "FALSE", "text": "FALSE"},
+            {"value": "NOT GIVEN", "text": "NOT GIVEN"}
+          ]
+        },
+        {
+          "index": 2,
+          "type": "sentence_completion_reading",
+          "prompt": "Complete the sentence. Choose NO MORE THAN TWO WORDS from the passage.\n\nThe Mesopotamians developed _____ systems for agriculture.",
+          "answer_key": "irrigation",
+          "max_words": 2
+        },
+        {
+          "index": 3,
+          "type": "multiple_choice_one_answer_reading",
+          "prompt": "According to the passage, what allowed Egyptian society to achieve remarkable developments?",
+          "answer_key": "B",
+          "options": [
+            {"value": "A", "text": "Advanced military technology"},
+            {"value": "B", "text": "Stable agricultural economy"},
+            {"value": "C", "text": "Trade relationships with other civilizations"},
+            {"value": "D", "text": "Large population growth"}
+          ]
+        },
+        {
+          "index": 4,
+          "type": "matching_headings",
+          "prompt": "Paragraph B",
+          "answer_key": "ii",
+          "headings": [
+            {"value": "i", "text": "Egyptian achievements in architecture"},
+            {"value": "ii", "text": "Mesopotamian innovations and developments"},
+            {"value": "iii", "text": "The importance of river systems"},
+            {"value": "iv", "text": "Modern applications of ancient knowledge"}
+          ]
+        },
+        {
+          "index": 5,
+          "type": "summary_completion_selecting_words_from_text",
+          "prompt": "Complete the summary using words from the passage. Write NO MORE THAN TWO WORDS for each answer.\n\nAncient civilizations developed along major _____. The Mesopotamians created _____ writing, while Egyptians built impressive _____.",
+          "answer_key": ["rivers", "cuneiform", "pyramids"],
+          "max_words": 2
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "title": "Passage 2: Climate Change and Agriculture",
+      "instructions": "Questions 6-20",
+      "passage_text": "Climate change represents one of the most significant challenges facing global agriculture in the 21st century. Rising temperatures, changing precipitation patterns, and increased frequency of extreme weather events are already affecting crop yields and agricultural productivity worldwide. Scientists predict that these impacts will intensify in the coming decades, threatening food security for billions of people.\n\nDr. Sarah Johnson, a leading climate researcher at the International Agricultural Institute, explains that different crops respond differently to climate change. While some plants may benefit from higher carbon dioxide levels and longer growing seasons in certain regions, most staple crops face significant challenges. Wheat production, for example, is particularly sensitive to temperature increases, with yields declining by approximately 6% for each degree of warming.\n\nMeanwhile, Prof. Michael Brown from the Sustainable Agriculture Research Center emphasizes the importance of adaptation strategies. Farmers are increasingly adopting drought-resistant crop varieties, implementing water-efficient irrigation systems, and adjusting planting schedules to cope with changing conditions. However, these adaptations require significant investment and technical knowledge, creating disparities between developed and developing nations.",
+      "questions": [
+        {
+          "index": 6,
+          "type": "matching_features",
+          "prompt": "Which researcher made the following statement about wheat production?",
+          "answer_key": "A",
+          "features": [
+            {"value": "A", "text": "Dr. Sarah Johnson"},
+            {"value": "B", "text": "Prof. Michael Brown"}
+          ]
+        },
+        {
+          "index": 7,
+          "type": "multiple_choice_more_than_one_answer_reading",
+          "prompt": "According to the passage, which TWO factors affect agricultural productivity?\n\nChoose TWO letters A-E.",
+          "answer_key": ["A", "C"],
+          "max_choices": 2,
+          "options": [
+            {"value": "A", "text": "Rising temperatures"},
+            {"value": "B", "text": "Population growth"},
+            {"value": "C", "text": "Extreme weather events"},
+            {"value": "D", "text": "Soil degradation"},
+            {"value": "E", "text": "Pesticide use"}
+          ]
+        },
+        {
+          "index": 8,
+          "type": "note_completion",
+          "prompt": "Complete the notes. Choose NO MORE THAN TWO WORDS from the passage.\n\nAdaptation strategies:\n• _____ crop varieties\n• Water-efficient _____ systems\n• Adjusted _____ schedules",
+          "answer_key": ["drought-resistant", "irrigation", "planting"],
+          "max_words": 2
+        }
+      ]
+    }
+  ]
+}

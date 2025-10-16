@@ -1,0 +1,42 @@
+{
+  "test_type": "writing",
+  "title": "IELTS Writing Practice Test - Complete Example",
+  "description": "Complete writing test with both tasks demonstrated",
+  "duration_seconds": 3600,
+  "audio_url": null,
+  "sections": [
+    {
+      "index": 1,
+      "title": "Writing Task 1",
+      "instructions": "Spend about 20 minutes on this task",
+      "questions": [
+        {
+          "index": 1,
+          "type": "writing_part_1",
+          "prompt": "The chart below shows the milk export figures from Italy, Russia and Poland from 2008 to 2012.\n\nSummarise the information by selecting and reporting the main features, and make comparisons where relevant.\n\nWrite at least 150 words.",
+          "answer_key": null,
+          "chart_image": "https://example.com/milk-export-chart-2008-2012.png",
+          "min_words": 150,
+          "task_number": 1,
+          "instructions": "You should spend about 20 minutes on this task."
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "title": "Writing Task 2",
+      "instructions": "Spend about 40 minutes on this task",
+      "questions": [
+        {
+          "index": 2,
+          "type": "writing_part_2",
+          "prompt": "Some people believe that international media, such as TV, radio and newspapers, have too much influence on the lives of young people today. Others believe that the influence of media is largely positive.\n\nDiscuss both these views and give your own opinion.\n\nGive reasons for your answer and include any relevant examples from your own knowledge or experience.\n\nWrite at least 250 words.",
+          "answer_key": null,
+          "min_words": 250,
+          "task_number": 2,
+          "instructions": "You should spend about 40 minutes on this task."
+        }
+      ]
+    }
+  ]
+}
