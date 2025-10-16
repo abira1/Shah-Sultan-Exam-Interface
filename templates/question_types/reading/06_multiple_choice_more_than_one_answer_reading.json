@@ -1,0 +1,49 @@
+{
+  "_comment_type": "Question Type: Multiple Choice More Than One Answer Reading", 
+  "_comment_description": "Students select multiple correct answers from options based on the reading passage.",
+  "_comment_use_case": "Reading Passage 2/3, identifying multiple features, facts, or characteristics",
+  
+  "_required_fields": [
+    "index", "type", "prompt", "answer_key", "options"
+  ],
+  
+  "_optional_fields": [
+    "max_choices", "instructions"
+  ],
+  
+  "index": 19,
+  "type": "multiple_choice_more_than_one_answer_reading",
+  "prompt": "According to the passage, which TWO factors contribute to climate change?\n\nChoose TWO letters A-F.",
+  "answer_key": ["A", "D"],
+  "max_choices": 2,
+  "options": [
+    {"value": "A", "text": "Industrial emissions"},
+    {"value": "B", "text": "Solar radiation changes"},
+    {"value": "C", "text": "Ocean current shifts"},
+    {"value": "D", "text": "Deforestation activities"},
+    {"value": "E", "text": "Volcanic eruptions"},
+    {"value": "F", "text": "Meteor impacts"}
+  ],
+  
+  "_field_descriptions": {
+    "index": "Question number (sequential, unique per test)",
+    "type": "Exact type name - must be 'multiple_choice_more_than_one_answer_reading'",
+    "prompt": "Question clearly stating how many answers to select (TWO, THREE)",
+    "answer_key": "Array of correct letters in any order [\"A\", \"D\"]",
+    "options": "Array of all available choices",
+    "max_choices": "Number of correct answers to select"
+  },
+  
+  "_validation_rules": {
+    "answer_key": "Array of strings matching option values",
+    "max_choices": "Integer 2-4, must match instruction in prompt",
+    "options": "Typically 5-8 options for multiple selection questions"
+  },
+  
+  "_grading": {
+    "method": "exact_set_match",
+    "partial_credit": false,
+    "order_independent": true,
+    "all_required": "Must select exactly the specified number of correct answers"
+  }
+}

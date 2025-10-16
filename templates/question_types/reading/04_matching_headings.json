@@ -1,0 +1,60 @@
+{
+  "_comment_type": "Question Type: Matching Headings",
+  "_comment_description": "Students match appropriate headings to paragraphs or sections of the reading passage.",
+  "_comment_use_case": "Reading Passage 1/2/3, paragraph comprehension, main idea identification",
+  
+  "_required_fields": [
+    "index", "type", "prompt", "answer_key", "headings"
+  ],
+  
+  "_optional_fields": [
+    "instructions"
+  ],
+  
+  "index": 17,
+  "type": "matching_headings",
+  "prompt": "Paragraph C",
+  "answer_key": "iv",
+  "headings": [
+    {"value": "i", "text": "Early development stages"},
+    {"value": "ii", "text": "Modern applications"},
+    {"value": "iii", "text": "Future possibilities"},
+    {"value": "iv", "text": "Technical challenges"},
+    {"value": "v", "text": "Economic implications"},
+    {"value": "vi", "text": "Environmental concerns"}
+  ],
+  
+  "_field_descriptions": {
+    "index": "Question number (sequential, unique per test)",
+    "type": "Exact type name - must be 'matching_headings'",
+    "prompt": "Paragraph identifier (A, B, C, etc.)",
+    "answer_key": "Roman numeral of correct heading (i, ii, iii, etc.)",
+    "headings": "Array of available headings with roman numeral values"
+  },
+  
+  "_validation_rules": {
+    "answer_key": "Roman numeral matching one heading value (i, ii, iii, iv, v, vi, etc.)",
+    "headings": "Array of objects with 'value' (roman numeral) and 'text' (heading)",
+    "typical_count": "Usually 6-10 headings for 4-7 paragraphs"
+  },
+  
+  "_grading": {
+    "method": "exact_match",
+    "case_sensitive": false,
+    "accepts_numeral_or_text": "Both 'iv' and 'Technical challenges' acceptable"
+  },
+  
+  "_heading_characteristics": {
+    "style": "Brief, descriptive phrases capturing paragraph main idea",
+    "specificity": "Specific enough to distinguish between similar topics",
+    "abstraction": "General enough to cover entire paragraph content"
+  },
+  
+  "_examples": [
+    {
+      "paragraph_topic": "Climate change effects on agriculture",
+      "correct_heading": "Environmental impact on food production",
+      "distractor_headings": ["Government policies", "Economic factors", "Technological solutions"]
+    }
+  ]
+}

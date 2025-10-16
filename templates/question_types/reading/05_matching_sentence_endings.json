@@ -1,0 +1,51 @@
+{
+  "_comment_type": "Question Type: Matching Sentence Endings",
+  "_comment_description": "Students complete sentence beginnings by choosing appropriate endings from a list.",
+  "_comment_use_case": "Reading Passage 2/3, sentence completion with multiple choice endings",
+  
+  "_required_fields": [
+    "index", "type", "prompt", "answer_key", "endings"
+  ],
+  
+  "_optional_fields": [
+    "instructions"
+  ],
+  
+  "index": 18,
+  "type": "matching_sentence_endings",
+  "prompt": "The research shows that global warming",
+  "answer_key": "C",
+  "endings": [
+    {"value": "A", "text": "affects only polar regions."},
+    {"value": "B", "text": "is caused entirely by human activity."},
+    {"value": "C", "text": "has multiple contributing factors."},
+    {"value": "D", "text": "can be easily reversed."},
+    {"value": "E", "text": "started in the last decade."}
+  ],
+  
+  "_field_descriptions": {
+    "index": "Question number (sequential, unique per test)",
+    "type": "Exact type name - must be 'matching_sentence_endings'",
+    "prompt": "Incomplete sentence beginning that students must complete",
+    "answer_key": "Letter of the ending that completes the sentence correctly",
+    "endings": "Array of possible sentence endings with letters and text"
+  },
+  
+  "_validation_rules": {
+    "answer_key": "Single letter matching one ending value (A, B, C, etc.)",
+    "endings": "Array of objects with 'value' (letter) and 'text' (ending)",
+    "grammatical_fit": "Endings must be grammatically compatible with beginnings"
+  },
+  
+  "_grading": {
+    "method": "exact_match",
+    "case_sensitive": false,
+    "grammar_consideration": "Ending must make grammatical sense with beginning"
+  },
+  
+  "_sentence_construction": {
+    "beginning_style": "Incomplete sentences that require specific information to complete",
+    "ending_style": "Grammatically complete phrases that finish the thought",
+    "distractor_quality": "Plausible but incorrect endings based on passage content"
+  }
+}
