@@ -617,6 +617,115 @@ async def validate_import(import_data: AIImportRequest):
     )
 
 
+@router.post("/api/tracks/validate-detailed")
+async def validate_import_detailed(request: AIImportRequest):
+    """
+    Validate import without creating anything
+    Shows what will be created and any auto-corrections
+    Enhanced version with detailed statistics and warnings
+    """
+    try:
+        # Validation happens automatically through Pydantic
+        # If we get here, validation passed
+        
+        # Collect statistics
+        total_questions = sum(len(section.questions) for section in request.sections)
+        questions_by_type = {}
+        
+        for section in request.sections:
+            for question in section.questions:
+                q_type = question.type
+                questions_by_type[q_type] = questions_by_type.get(q_type, 0) + 1
+        
+        # Check for potential issues (warnings, not errors)
+        warnings = []
+        
+        # Check audio URL for listening
+        if request.test_type == "listening" and not request.audio_url:
+            warnings.append("Listening test should have audio_url")
+        
+        # Check passage text for reading
+        for section in request.sections:
+            if request.test_type == "reading" and not section.passage_text:
+                warnings.append(f"Section {section.index}: Reading section should have passage_text")
+        
+        # Check question count
+        if request.test_type in ["listening", "reading"] and total_questions != 40:
+            warnings.append(f"Expected 40 questions for {request.test_type}, got {total_questions}")
+        
+        if request.test_type == "writing" and total_questions != 2:
+            warnings.append(f"Expected 2 tasks for writing, got {total_questions}")
+        
+        # Analyze question type distribution
+        listening_types = sum(1 for qtype in questions_by_type.keys() 
+                            if qtype in ["fill_in_the_gaps", "fill_in_the_gaps_short_answers",
+                                       "flowchart_completion_listening", "form_completion",
+                                       "labelling_on_a_map", "matching_listening",
+                                       "multiple_choice_more_than_one_answer_listening",
+                                       "multiple_choice_one_answer_listening",
+                                       "sentence_completion_listening", "table_completion_listening"])
+        
+        reading_types = sum(1 for qtype in questions_by_type.keys() 
+                          if qtype in ["flowchart_completion_selecting_words_from_text",
+                                     "identifying_information_true_false_not_given",
+                                     "matching_features", "matching_headings",
+                                     "matching_sentence_endings",
+                                     "multiple_choice_more_than_one_answer_reading",
+                                     "multiple_choice_one_answer_reading", "note_completion",
+                                     "sentence_completion_reading",
+                                     "summary_completion_selecting_from_list",
+                                     "summary_completion_selecting_words_from_text",
+                                     "table_completion_reading"])
+        
+        writing_types = sum(1 for qtype in questions_by_type.keys() 
+                          if qtype in ["writing_part_1", "writing_part_2"])
+        
+        return {
+            "valid": True,
+            "message": "Import validation successful",
+            "statistics": {
+                "test_type": request.test_type,
+                "title": request.title,
+                "total_sections": len(request.sections),
+                "total_questions": total_questions,
+                "duration_minutes": request.duration_seconds // 60,
+                "questions_by_type": questions_by_type,
+                "type_analysis": {
+                    "listening_question_types": listening_types,
+                    "reading_question_types": reading_types,
+                    "writing_question_types": writing_types
+                }
+            },
+            "warnings": warnings if warnings else None,
+            "preview": {
+                "exam_id": "will_be_generated_on_import",
+                "will_create": {
+                    "exam": 1,
+                    "sections": len(request.sections),
+                    "questions": total_questions
+                }
+            },
+            "normalized_data": request.dict()  # Show final processed data
+        }
+        
+    except ValidationError as e:
+        # Return detailed validation errors
+        return {
+            "valid": False,
+            "errors": [
+                {
+                    "field": ".".join(str(x) for x in error["loc"]),
+                    "message": error["msg"],
+                    "type": error["type"],
+                    "input": error.get("input")
+                }
+                for error in e.errors()
+            ],
+            "help": "See documentation for examples. Common issues: invalid question type names, missing answer_key, wrong section/question counts.",
+            "suggestion": "Use the comprehensive legacy type mapping - most common type names are automatically converted."
+        }
+
+
 @router.post("/api/tracks/import-from-ai", response_model=TrackCreateResponse)
 async def import_track_from_ai(import_data: AIImportRequest, db: AsyncIOMotorDatabase = Depends(get_database)):
     """
