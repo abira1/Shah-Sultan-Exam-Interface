@@ -253,7 +253,7 @@ class QuestionImport(BaseModel):
         return v
     
     @validator('word_list')
-    def merge_wordlist_field(cls, v, values):
+    def merge_wordlist_fields(cls, v, values):
         """Merge legacy 'wordlist' field into 'word_list'"""
         # If word_list is None but wordlist exists, use wordlist
         if v is None and 'wordlist' in values and values['wordlist']:
