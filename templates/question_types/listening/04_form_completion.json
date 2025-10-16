@@ -1,0 +1,71 @@
+{
+  "_comment_type": "Question Type: Form Completion",
+  "_comment_description": "Students complete a form by filling in missing information from the listening.",
+  "_comment_use_case": "Listening Section 1, personal information, bookings, applications",
+  
+  "_required_fields": [
+    "index", "type", "prompt", "answer_key"
+  ],
+  
+  "_optional_fields": [
+    "form_fields", "max_words", "instructions"
+  ],
+  
+  "index": 4,
+  "type": "form_completion",
+  "prompt": "Complete the form below. Write NO MORE THAN THREE WORDS AND/OR A NUMBER for each answer.",
+  "answer_key": ["Sarah Johnson", "07123 456789", "vegetarian", "Friday", "2"],
+  "max_words": 3,
+  "form_fields": [
+    {"label": "Name", "type": "text"},
+    {"label": "Phone Number", "type": "phone"},
+    {"label": "Dietary Requirements", "type": "text"},
+    {"label": "Preferred Day", "type": "text"},
+    {"label": "Number of Tickets", "type": "number"}
+  ],
+  
+  "_field_descriptions": {
+    "index": "Question number (sequential, unique per test)",
+    "type": "Exact type name - must be 'form_completion'",
+    "prompt": "Instructions for completing the form with word limit",
+    "answer_key": "Array of answers for each form field in order",
+    "max_words": "Maximum words per field (default: 3, range: 1-5)",
+    "form_fields": "Optional array describing form structure"
+  },
+  
+  "_validation_rules": {
+    "answer_key": "Array of strings/numbers, one for each form field",
+    "max_words": "Integer 1-5, commonly 3 for forms",
+    "form_fields": "Optional metadata about form structure"
+  },
+  
+  "_grading": {
+    "method": "case_insensitive_exact_match_per_field",
+    "accepts_numbers": true,
+    "accepts_abbreviations": "Common abbreviations accepted",
+    "array_order": "Answers must match form field order"
+  },
+  
+  "_common_form_types": [
+    "Personal information forms",
+    "Booking/reservation forms", 
+    "Application forms",
+    "Registration forms",
+    "Membership forms"
+  ],
+  
+  "_examples": [
+    {
+      "form_type": "Hotel Booking",
+      "answer_key": ["David Wilson", "double", "3 nights", "swimming pool", "credit card"]
+    },
+    {
+      "form_type": "Course Registration",
+      "answer_key": ["Mathematics", "Monday", "Dr. Smith", "Room 204", "textbook"]
+    },
+    {
+      "form_type": "Event Booking",
+      "answer_key": ["Jazz Festival", "weekend", "student discount", "online", "confirmation email"]
+    }
+  ]
+}
