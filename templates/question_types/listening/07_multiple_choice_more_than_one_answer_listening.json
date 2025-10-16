@@ -1,0 +1,67 @@
+{
+  "_comment_type": "Question Type: Multiple Choice More Than One Answer Listening",
+  "_comment_description": "Students select multiple correct answers from a list of options based on the listening.",
+  "_comment_use_case": "Listening Section 2/3/4, identifying multiple features, characteristics, or facts",
+  
+  "_required_fields": [
+    "index", "type", "prompt", "answer_key", "options"
+  ],
+  
+  "_optional_fields": [
+    "max_choices", "instructions"
+  ],
+  
+  "index": 7,
+  "type": "multiple_choice_more_than_one_answer_listening",
+  "prompt": "Which TWO features of the library does the speaker mention?\n\nChoose TWO letters A-E.",
+  "answer_key": ["B", "D"],
+  "max_choices": 2,
+  "options": [
+    {"value": "A", "text": "24-hour access"},
+    {"value": "B", "text": "Silent study areas"},
+    {"value": "C", "text": "Cafe facilities"},
+    {"value": "D", "text": "Computer terminals"},
+    {"value": "E", "text": "Group study rooms"}
+  ],
+  
+  "_field_descriptions": {
+    "index": "Question number (sequential, unique per test)",
+    "type": "Exact type name - must be 'multiple_choice_more_than_one_answer_listening'",
+    "prompt": "Question asking for multiple answers with clear instruction (TWO, THREE)",
+    "answer_key": "Array of correct letters/options [\"B\", \"D\"]",
+    "options": "Array of all available choices with value and text",
+    "max_choices": "Number of answers to select (2, 3, or 4)"
+  },
+  
+  "_validation_rules": {
+    "answer_key": "Array of strings, each must match an option value",
+    "max_choices": "Integer 2-4, should match instruction in prompt",
+    "options": "Array of objects with 'value' and 'text', typically 5-8 options"
+  },
+  
+  "_grading": {
+    "method": "exact_set_match", 
+    "partial_credit": false,
+    "order_independent": "[\"B\", \"D\"] same as [\"D\", \"B\"]",
+    "all_required": "Must select exactly the right answers, no more, no less"
+  },
+  
+  "_typical_instructions": [
+    "Choose TWO letters A-E",
+    "Select THREE answers from A-H", 
+    "Which TWO/THREE things does the speaker mention?"
+  ],
+  
+  "_examples": [
+    {
+      "scenario": "Course requirements (choose TWO)",
+      "options": ["attendance", "essay", "presentation", "exam", "portfolio"],
+      "answer_key": ["essay", "exam"]
+    },
+    {
+      "scenario": "Restaurant features (choose THREE)",
+      "options": ["outdoor seating", "live music", "parking", "takeaway", "children's menu", "vegetarian options"],
+      "answer_key": ["outdoor seating", "parking", "vegetarian options"]
+    }
+  ]
+}

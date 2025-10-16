@@ -1,0 +1,66 @@
+{
+  "_comment_type": "Question Type: Matching Listening",
+  "_comment_description": "Students match items, people, or concepts heard in the audio to options from a list.",
+  "_comment_use_case": "Listening Section 2/3, matching speakers to opinions, items to categories",
+  
+  "_required_fields": [
+    "index", "type", "prompt", "answer_key"
+  ],
+  
+  "_optional_fields": [
+    "features", "options", "instructions"
+  ],
+  
+  "index": 6,
+  "type": "matching_listening",
+  "prompt": "What does each speaker say about their hobby? Choose your answers from the box.\n\nA. It's expensive\nB. It's time-consuming\nC. It's relaxing\nD. It's challenging\nE. It's social",
+  "answer_key": "C",
+  "features": [
+    {"value": "A", "text": "It's expensive"},
+    {"value": "B", "text": "It's time-consuming"},
+    {"value": "C", "text": "It's relaxing"},
+    {"value": "D", "text": "It's challenging"},
+    {"value": "E", "text": "It's social"}
+  ],
+  
+  "_field_descriptions": {
+    "index": "Question number (sequential, unique per test)",
+    "type": "Exact type name - must be 'matching_listening'",
+    "prompt": "Question context and available options to match",
+    "answer_key": "Letter/option that matches the audio content",
+    "features": "Array of available options with value and text"
+  },
+  
+  "_validation_rules": {
+    "answer_key": "Single letter/option (A, B, C, etc.)",
+    "features": "Array of objects with 'value' and 'text' properties",
+    "prompt": "Should include all available matching options"
+  },
+  
+  "_grading": {
+    "method": "exact_match",
+    "case_sensitive": false,
+    "accepts_letter_or_text": "Both 'C' and 'It's relaxing' acceptable"
+  },
+  
+  "_common_matching_scenarios": [
+    "People to opinions/characteristics",
+    "Items to categories/purposes",
+    "Activities to descriptions", 
+    "Places to features",
+    "Problems to solutions"
+  ],
+  
+  "_examples": [
+    {
+      "scenario": "Course subjects to student comments",
+      "options": ["too difficult", "very practical", "quite boring", "really interesting"],
+      "answer_key": "very practical"
+    },
+    {
+      "scenario": "Facilities to their main purpose",
+      "options": ["exercise", "study", "eating", "shopping", "meeting"],
+      "answer_key": "study"
+    }
+  ]
+}
