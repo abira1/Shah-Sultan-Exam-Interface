@@ -16,45 +16,36 @@ router = APIRouter()
 # PYDANTIC MODELS
 # ============================================
 
+# Legacy type name mapping for backward compatibility
+LEGACY_TYPE_MAPPING = {
+    # Legacy reading types -> QTI types
+    "true_false_not_given": "identifying_information_true_false_not_given",
+    "yes_no_not_given": "identifying_information_true_false_not_given",
+    "short_answer_reading": "sentence_completion_reading",
+    "sentence_completion_wordlist": "summary_completion_selecting_from_list",
+    "matching_headings_reading": "matching_headings",
+    "matching_features_reading": "matching_features",
+    "matching_sentence_endings_reading": "matching_sentence_endings",
+    "summary_completion": "summary_completion_selecting_from_list",
+    "table_completion": "table_completion_reading",
+    "note_completion_reading": "note_completion",
+    "flowchart_completion": "flowchart_completion_selecting_words_from_text",
+    # Legacy listening types
+    "short_answer": "fill_in_the_gaps_short_answers",
+    "multiple_choice_listening": "multiple_choice_one_answer_listening",
+    "sentence_completion": "sentence_completion_listening",
+}
+
 class QuestionImport(BaseModel):
-    """Individual question in the import - ALL 24 QTI Question Types"""
+    """Individual question in the import - ALL 24 QTI Question Types + Legacy Types"""
     index: int = Field(..., ge=1, description="Question number (1-40 for L/R, 1-2 for W)")
-    type: Literal[
-        # LISTENING TYPES (10)
-        "fill_in_the_gaps",
-        "fill_in_the_gaps_short_answers",
-        "flowchart_completion_listening",
-        "form_completion",
-        "labelling_on_a_map",
-        "matching_listening",
-        "multiple_choice_more_than_one_answer_listening",
-        "multiple_choice_one_answer_listening",
-        "sentence_completion_listening",
-        "table_completion_listening",
-        
-        # READING TYPES (12)
-        "flowchart_completion_selecting_words_from_text",
-        "identifying_information_true_false_not_given",
-        "matching_features",
-        "matching_headings",
-        "matching_sentence_endings",
-        "multiple_choice_more_than_one_answer_reading",
-        "multiple_choice_one_answer_reading",
-        "note_completion",
-        "sentence_completion_reading",
-        "summary_completion_selecting_from_list",
-        "summary_completion_selecting_words_from_text",
-        "table_completion_reading",
-        
-        # WRITING TYPES (2)
-        "writing_part_1",
-        "writing_part_2"
-    ]
+    type: str  # Changed from Literal to str to accept legacy types
     prompt: str = Field(..., min_length=1, description="Question text")
     answer_key: Optional[Any] = Field(None, description="Correct answer (string, list, or null for writing)")
     max_words: Optional[int] = Field(None, ge=1, le=10, description="Max words allowed")
     min_words: Optional[int] = Field(None, ge=50, le=500, description="Min words required (writing)")
-    options: Optional[List[Dict[str, str]]] = Field(None, description="Multiple choice options [{value:'A', text:'...'}]")
+    options: Optional[Any] = Field(None, description="Multiple choice options (array of dicts or strings)")
+    wordlist: Optional[List[str]] = Field(None, description="Word bank for summary completion (legacy field name)")
     image_url: Optional[str] = Field(None, description="URL for map/diagram/flowchart images")
     word_list: Optional[List[str]] = Field(None, description="Word bank for summary completion")
     headings: Optional[List[Dict[str, str]]] = Field(None, description="Headings for matching [{value:'i', text:'...'}]")
@@ -66,6 +57,67 @@ class QuestionImport(BaseModel):
     table_data: Optional[Dict[str, Any]] = Field(None, description="Table structure for completion questions")
     form_fields: Optional[List[Dict[str, Any]]] = Field(None, description="Form fields for form_completion")
     max_choices: Optional[int] = Field(None, ge=2, le=5, description="Number of choices for multiple answer questions")
+
+    @validator('type', pre=True)
+    def normalize_question_type(cls, v):
+        """Convert legacy type names to QTI standard names"""
+        if v in LEGACY_TYPE_MAPPING:
+            return LEGACY_TYPE_MAPPING[v]
+        return v
+    
+    @validator('type')
+    def validate_question_type(cls, v):
+        """Ensure type is valid after normalization"""
+        valid_types = {
+            # LISTENING TYPES (10)
+            "fill_in_the_gaps",
+            "fill_in_the_gaps_short_answers",
+            "flowchart_completion_listening",
+            "form_completion",
+            "labelling_on_a_map",
+            "matching_listening",
+            "multiple_choice_more_than_one_answer_listening",
+            "multiple_choice_one_answer_listening",
+            "sentence_completion_listening",
+            "table_completion_listening",
+            # READING TYPES (12)
+            "flowchart_completion_selecting_words_from_text",
+            "identifying_information_true_false_not_given",
+            "matching_features",
+            "matching_headings",
+            "matching_sentence_endings",
+            "multiple_choice_more_than_one_answer_reading",
+            "multiple_choice_one_answer_reading",
+            "note_completion",
+            "sentence_completion_reading",
+            "summary_completion_selecting_from_list",
+            "summary_completion_selecting_words_from_text",
+            "table_completion_reading",
+            # WRITING TYPES (2)
+            "writing_part_1",
+            "writing_part_2"
+        }
+        if v not in valid_types:
+            raise ValueError(f"Invalid question type: '{v}'. Must be one of: {', '.join(sorted(valid_types))}")
+        return v
+    
+    @validator('options', pre=True)
+    def normalize_options(cls, v):
+        """Convert string arrays to dict arrays for TRUE/FALSE/NOT GIVEN questions"""
+        if v is None:
+            return None
+        # If options is a list of strings, convert to list of dicts
+        if isinstance(v, list) and len(v) > 0 and isinstance(v[0], str):
+            return [{"value": opt, "text": opt} for opt in v]
+        return v
+    
+    @validator('word_list')
+    def merge_wordlist_field(cls, v, values):
+        """Merge legacy 'wordlist' field into 'word_list'"""
+        # If word_list is None but wordlist exists, use wordlist
+        if v is None and 'wordlist' in values and values['wordlist']:
+            return values['wordlist']
+        return v
 
     @validator('answer_key')
     def validate_answer_key(cls, v, values):
