@@ -1,0 +1,86 @@
+{
+  "_comment_type": "Question Type: Writing Part 2",
+  "_comment_description": "Students write an essay responding to a point of view, argument, or problem in at least 250 words.",
+  "_comment_use_case": "Writing Task 2, academic essay writing, argumentation and analysis",
+  
+  "_required_fields": [
+    "index", "type", "prompt", "min_words"
+  ],
+  
+  "_optional_fields": [
+    "task_number", "instructions", "answer_key"
+  ],
+  
+  "index": 2,
+  "type": "writing_part_2",
+  "prompt": "Some people believe that international media, such as TV, radio and newspapers, have too much influence on the lives of young people today. Others believe that the influence of media is largely positive.\n\nDiscuss both these views and give your own opinion.\n\nGive reasons for your answer and include any relevant examples from your own knowledge or experience.",
+  "answer_key": null,
+  "min_words": 250,
+  "task_number": 2,
+  "instructions": "You should spend about 40 minutes on this task.",
+  
+  "_field_descriptions": {
+    "index": "Question number (usually 2 for writing task 2)",
+    "type": "Exact type name - must be 'writing_part_2'",
+    "prompt": "Essay question with topic, task, and specific instructions",
+    "answer_key": "Always null - no auto-grading for writing tasks",
+    "min_words": "Minimum words required (must be 250 for Task 2)",
+    "task_number": "Task number (2 for Part 2)",
+    "instructions": "Time allocation and writing guidelines"
+  },
+  
+  "_validation_rules": {
+    "answer_key": "Must be null for writing tasks",
+    "min_words": "Must be exactly 250 for IELTS Writing Task 2",
+    "task_number": "Should be 2 for Writing Part 2",
+    "prompt_structure": "Should include clear task instruction and guidance"
+  },
+  
+  "_grading": {
+    "method": "manual_grading_only",
+    "criteria": ["Task Response", "Coherence and Cohesion", "Lexical Resource", "Grammatical Range and Accuracy"],
+    "word_count": "Minimum 250 words enforced in UI",
+    "time_limit": "40 minutes recommended"
+  },
+  
+  "_essay_types": [
+    "Opinion essays (agree/disagree)",
+    "Discussion essays (discuss both views)",
+    "Problem-solution essays",
+    "Advantage-disadvantage essays",
+    "Direct question essays"
+  ],
+  
+  "_task_requirements": {
+    "position": "Clear position/opinion stated",
+    "development": "Ideas fully developed with explanations",
+    "examples": "Relevant examples to support arguments", 
+    "structure": "Logical essay structure (intro, body, conclusion)",
+    "task_response": "Direct response to all parts of the question",
+    "coherence": "Clear progression of ideas with linking"
+  },
+  
+  "_common_topics": [
+    "Education and learning", "Technology and society", "Environment and sustainability",
+    "Work and careers", "Health and lifestyle", "Government and policy",
+    "Media and communication", "Globalization", "Social issues"
+  ],
+  
+  "_examples": [
+    {
+      "essay_type": "Opinion essay",
+      "topic": "University education should be free for all students",
+      "task": "To what extent do you agree or disagree?"
+    },
+    {
+      "essay_type": "Discussion essay",
+      "topic": "Working from home vs office work",
+      "task": "Discuss both views and give your opinion"
+    },
+    {
+      "essay_type": "Problem-solution",
+      "topic": "Urban traffic congestion", 
+      "task": "What are the causes and what solutions can you suggest?"
+    }
+  ]
+}

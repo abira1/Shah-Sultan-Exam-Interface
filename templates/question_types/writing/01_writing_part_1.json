@@ -1,0 +1,73 @@
+{
+  "_comment_type": "Question Type: Writing Part 1",
+  "_comment_description": "Students describe visual information (charts, graphs, diagrams, maps) in at least 150 words.",
+  "_comment_use_case": "Writing Task 1, academic writing, data description and analysis",
+  
+  "_required_fields": [
+    "index", "type", "prompt", "min_words"
+  ],
+  
+  "_optional_fields": [
+    "chart_image", "task_number", "instructions", "answer_key"
+  ],
+  
+  "index": 1,
+  "type": "writing_part_1",
+  "prompt": "The chart shows the milk export figures from Italy, Russia and Poland from 2008 to 2012.\n\nSummarise the information by selecting and reporting the main features, and make comparisons where relevant.",
+  "answer_key": null,
+  "chart_image": "https://example.com/milk-export-chart.png",
+  "min_words": 150,
+  "task_number": 1,
+  "instructions": "You should spend about 20 minutes on this task.",
+  
+  "_field_descriptions": {
+    "index": "Question number (usually 1 for writing task 1)",
+    "type": "Exact type name - must be 'writing_part_1'",
+    "prompt": "Description of visual information and task instructions",
+    "answer_key": "Always null - no auto-grading for writing tasks",
+    "chart_image": "URL to chart, graph, diagram, or map image",
+    "min_words": "Minimum words required (must be 150 for Task 1)",
+    "task_number": "Task number (1 for Part 1)",
+    "instructions": "Time allocation and additional instructions"
+  },
+  
+  "_validation_rules": {
+    "answer_key": "Must be null for writing tasks",
+    "min_words": "Must be exactly 150 for IELTS Writing Task 1",
+    "chart_image": "Strongly recommended for data description tasks",
+    "task_number": "Should be 1 for Writing Part 1"
+  },
+  
+  "_grading": {
+    "method": "manual_grading_only",
+    "criteria": ["Task Achievement", "Coherence and Cohesion", "Lexical Resource", "Grammatical Range and Accuracy"],
+    "word_count": "Minimum 150 words enforced in UI",
+    "time_limit": "20 minutes recommended"
+  },
+  
+  "_visual_types": [
+    "Bar charts", "Line graphs", "Pie charts", "Tables", 
+    "Process diagrams", "Maps", "Flow charts", "Cycle diagrams"
+  ],
+  
+  "_task_requirements": {
+    "overview": "Identify and describe main trends/features",
+    "details": "Support overview with specific data/information", 
+    "comparisons": "Make relevant comparisons between data points",
+    "accuracy": "Report information accurately from visual",
+    "organization": "Logical structure with clear paragraphs"
+  },
+  
+  "_examples": [
+    {
+      "visual_type": "Line graph",
+      "topic": "Population growth in three cities 2000-2020",
+      "key_features": ["Overall upward trend", "City A fastest growth", "City C slowest growth"]
+    },
+    {
+      "visual_type": "Process diagram", 
+      "topic": "How chocolate is produced",
+      "key_features": ["Sequential stages", "Raw materials to final product", "Multiple processing steps"]
+    }
+  ]
+}
