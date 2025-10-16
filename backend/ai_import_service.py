@@ -261,15 +261,28 @@ class QuestionImport(BaseModel):
         return v
 
     @validator('answer_key')
-    def validate_answer_key(cls, v, values):
-        """Answer key required for all types except writing types"""
+    def validate_answer_key_presence(cls, v, values):
+        """Ensure answer_key present for non-writing types"""
         q_type = values.get('type')
+        
         # Writing types don't need answer keys (manual grading)
         if q_type in ['writing_part_1', 'writing_part_2']:
             return None
-        if not v:
-            raise ValueError(f"answer_key is required for question type '{q_type}'")
+        
+        if v is None or (isinstance(v, str) and not v.strip()):
+            raise ValueError(
+                f"answer_key is required for question type '{q_type}'. "
+                f"Only writing questions (writing_part_1, writing_part_2) can have null answer_key."
+            )
+        
         return v
+    
+    @validator('prompt')
+    def validate_prompt(cls, v):
+        """Ensure prompt is not empty"""
+        if not v or not v.strip():
+            raise ValueError("Question prompt cannot be empty")
+        return v.strip()
 
 
 class SectionImport(BaseModel):
