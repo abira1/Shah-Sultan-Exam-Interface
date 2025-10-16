@@ -1,0 +1,58 @@
+{
+  "_comment_type": "Question Type: Flowchart Completion Listening",
+  "_comment_description": "Students complete a flowchart by listening to a process or procedure description.",
+  "_comment_use_case": "Listening Section 2/4, process descriptions and procedures",
+  
+  "_required_fields": [
+    "index", "type", "prompt", "answer_key"
+  ],
+  
+  "_optional_fields": [
+    "image_url", "max_words", "instructions"
+  ],
+  
+  "index": 3,
+  "type": "flowchart_completion_listening",
+  "prompt": "Complete the flowchart below using NO MORE THAN TWO WORDS for each answer.",
+  "answer_key": ["registration", "ID card", "library access"],
+  "max_words": 2,
+  "image_url": "https://example.com/student-enrollment-flowchart.png",
+  
+  "_field_descriptions": {
+    "index": "Question number (sequential, unique per test)",
+    "type": "Exact type name - must be 'flowchart_completion_listening'",
+    "prompt": "Instructions for completing the flowchart",
+    "answer_key": "Array of answers for flowchart boxes in order",
+    "max_words": "Maximum words per flowchart box (default: 2, range: 1-3)",
+    "image_url": "URL to flowchart image with blank boxes"
+  },
+  
+  "_validation_rules": {
+    "answer_key": "Array of strings, one for each blank box in flowchart",
+    "max_words": "Integer 1-3, typically 2 for flowcharts",
+    "image_url": "Optional but recommended for complex flowcharts"
+  },
+  
+  "_grading": {
+    "method": "case_insensitive_exact_match_per_box",
+    "word_limit_enforced": true,
+    "array_order": "Answers correspond to flowchart boxes in order"
+  },
+  
+  "_flowchart_structure": {
+    "description": "Typical flowchart has 3-6 completion boxes",
+    "numbering": "Boxes should be clearly numbered or have logical flow",
+    "blank_format": "Empty boxes or _____ placeholders"
+  },
+  
+  "_examples": [
+    {
+      "topic": "Library Registration Process",
+      "answer_key": ["student card", "photo ID", "signature", "borrowing rights"]
+    },
+    {
+      "topic": "Course Enrollment Steps", 
+      "answer_key": ["online application", "payment confirmation", "timetable selection"]
+    }
+  ]
+}
