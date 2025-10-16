@@ -4,11 +4,12 @@ Handles validation and creation of tracks from AI-extracted JSON
 """
 
 from fastapi import APIRouter, HTTPException, Depends
-from pydantic import BaseModel, validator, Field
+from pydantic import BaseModel, validator, Field, ValidationError
 from typing import List, Optional, Literal, Dict, Any
 import uuid
 from datetime import datetime
 from motor.motor_asyncio import AsyncIOMotorDatabase
+from difflib import get_close_matches
 
 router = APIRouter()
 
