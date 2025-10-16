@@ -1,0 +1,39 @@
+{
+  "_comment_type": "Question Type: Fill in the Gaps",
+  "_comment_description": "Students fill in missing words in sentences. Used for listening for specific information.",
+  "_comment_use_case": "Listening Section 1, factual information questions",
+  
+  "_required_fields": [
+    "index", "type", "prompt", "answer_key"
+  ],
+  
+  "_optional_fields": [
+    "max_words", "instructions"
+  ],
+  
+  "index": 1,
+  "type": "fill_in_the_gaps",
+  "prompt": "The student will study _____ at university.",
+  "answer_key": "engineering",
+  "max_words": 1,
+  
+  "_field_descriptions": {
+    "index": "Question number (sequential, unique per test)",
+    "type": "Exact type name - must be 'fill_in_the_gaps'",
+    "prompt": "Question text with _____ for blank space",
+    "answer_key": "Correct answer (case-insensitive matching)",
+    "max_words": "Maximum words allowed (default: 3, range: 1-5)"
+  },
+  
+  "_validation_rules": {
+    "answer_key": "String, no special chars except hyphen/apostrophe",
+    "max_words": "Integer 1-5",
+    "prompt": "Must contain at least one _____"
+  },
+  
+  "_grading": {
+    "method": "case_insensitive_exact_match",
+    "accepts_variations": ["engineering", "Engineering", "ENGINEERING"],
+    "rejects": ["engineer", "engineerings", "engine"]
+  }
+}
