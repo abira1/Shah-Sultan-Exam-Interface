@@ -1,0 +1,74 @@
+{
+  "_comment_type": "Question Type: Table Completion Listening",
+  "_comment_description": "Students complete missing information in a table format based on the listening.",
+  "_comment_use_case": "Listening Section 2/4, organized information, schedules, comparisons",
+  
+  "_required_fields": [
+    "index", "type", "prompt", "answer_key"
+  ],
+  
+  "_optional_fields": [
+    "table_data", "max_words", "instructions"
+  ],
+  
+  "index": 10,
+  "type": "table_completion_listening",
+  "prompt": "Complete the table below. Write NO MORE THAN TWO WORDS AND/OR A NUMBER for each answer.",
+  "answer_key": ["Biology", "Dr. Williams", "Room 105", "Tuesdays", "2 hours"],
+  "max_words": 2,
+  "table_data": {
+    "headers": ["Subject", "Lecturer", "Location", "Day", "Duration"],
+    "rows": [
+      ["_____", "_____", "_____", "_____", "_____"]
+    ]
+  },
+  
+  "_field_descriptions": {
+    "index": "Question number (sequential, unique per test)",
+    "type": "Exact type name - must be 'table_completion_listening'",
+    "prompt": "Instructions for completing the table with word/number limit",
+    "answer_key": "Array of answers for each table cell in order (left to right, top to bottom)",
+    "max_words": "Maximum words per cell (default: 2, range: 1-3)",
+    "table_data": "Optional structure showing table headers and layout"
+  },
+  
+  "_validation_rules": {
+    "answer_key": "Array of strings/numbers matching table cells in order",
+    "max_words": "Integer 1-3, commonly 2 for table completion",
+    "table_data": "Optional but helpful for complex tables"
+  },
+  
+  "_grading": {
+    "method": "case_insensitive_exact_match_per_cell",
+    "accepts_numbers": true,
+    "accepts_abbreviations": "Common abbreviations accepted (Dr., Prof., Mon., etc.)",
+    "array_order": "Answers must match table order (row by row, left to right)"
+  },
+  
+  "_table_types": [
+    "Course schedules",
+    "Event programs", 
+    "Facility information",
+    "Price comparisons",
+    "Booking details",
+    "Contact information"
+  ],
+  
+  "_examples": [
+    {
+      "table_type": "Event Schedule",
+      "headers": ["Time", "Activity", "Location"],
+      "answer_key": ["10:30", "Registration", "Main Hall"]
+    },
+    {
+      "table_type": "Course Information", 
+      "headers": ["Course", "Level", "Fee", "Start Date"],
+      "answer_key": ["Spanish", "Beginner", "£180", "March 5th"]
+    },
+    {
+      "table_type": "Facility Comparison",
+      "headers": ["Facility", "Capacity", "Equipment", "Booking Required"],
+      "answer_key": ["Conference Room", "50 people", "projector", "Yes"]
+    }
+  ]
+}

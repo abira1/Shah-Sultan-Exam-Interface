@@ -1,0 +1,72 @@
+{
+  "_comment_type": "Question Type: Multiple Choice One Answer Listening",
+  "_comment_description": "Students select one correct answer from multiple options based on the listening.",
+  "_comment_use_case": "Listening Section 1/2/3/4, factual questions, main ideas, specific details",
+  
+  "_required_fields": [
+    "index", "type", "prompt", "answer_key", "options"
+  ],
+  
+  "_optional_fields": [
+    "instructions"
+  ],
+  
+  "index": 8,
+  "type": "multiple_choice_one_answer_listening",
+  "prompt": "What is the main topic of the lecture?",
+  "answer_key": "B",
+  "options": [
+    {"value": "A", "text": "Climate change effects"},
+    {"value": "B", "text": "Renewable energy sources"},
+    {"value": "C", "text": "Environmental protection policies"},
+    {"value": "D", "text": "Sustainable agriculture practices"}
+  ],
+  
+  "_field_descriptions": {
+    "index": "Question number (sequential, unique per test)",
+    "type": "Exact type name - must be 'multiple_choice_one_answer_listening'",
+    "prompt": "Question asking for one answer from the options",
+    "answer_key": "Single letter/option that is correct (A, B, C, D)",
+    "options": "Array of all available choices with value and text"
+  },
+  
+  "_validation_rules": {
+    "answer_key": "Single string matching one option value",
+    "options": "Array of objects with 'value' and 'text', typically 3-4 options"
+  },
+  
+  "_grading": {
+    "method": "exact_match",
+    "case_sensitive": false,
+    "accepts_letter_or_text": "Both 'B' and 'Renewable energy sources' acceptable"
+  },
+  
+  "_common_question_types": [
+    "Main idea/topic questions",
+    "Specific detail questions",
+    "Speaker attitude/opinion",
+    "Factual information",
+    "Reason/purpose questions"
+  ],
+  
+  "_examples": [
+    {
+      "question_type": "Specific detail",
+      "prompt": "How much does the course cost?",
+      "options": ["£150", "£200", "£250", "£300"],
+      "answer_key": "£200"
+    },
+    {
+      "question_type": "Speaker opinion",
+      "prompt": "What does the speaker think about the new system?",
+      "options": ["It's too complicated", "It's very efficient", "It needs improvement", "It's too expensive"],
+      "answer_key": "It's very efficient"
+    },
+    {
+      "question_type": "Purpose/reason",
+      "prompt": "Why did they change the location?",
+      "options": ["Better facilities", "Lower cost", "More space", "Easier access"],
+      "answer_key": "More space"
+    }
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "_comment_type": "Question Type: Sentence Completion Listening",
+  "_comment_description": "Students complete sentences by filling in missing words or phrases from the listening.",
+  "_comment_use_case": "Listening Section 1/3/4, completing sentences with specific information",
+  
+  "_required_fields": [
+    "index", "type", "prompt", "answer_key"
+  ],
+  
+  "_optional_fields": [
+    "max_words", "instructions"
+  ],
+  
+  "index": 9,
+  "type": "sentence_completion_listening",
+  "prompt": "Complete the sentence below. Write NO MORE THAN TWO WORDS for your answer.\n\nThe library closes at _____ on weekdays.",
+  "answer_key": "9 pm",
+  "max_words": 2,
+  
+  "_field_descriptions": {
+    "index": "Question number (sequential, unique per test)",
+    "type": "Exact type name - must be 'sentence_completion_listening'",
+    "prompt": "Sentence with blank to complete, including word limit instruction",
+    "answer_key": "Correct word(s) or phrase to complete the sentence",
+    "max_words": "Maximum words allowed (default: 3, range: 1-5)"
+  },
+  
+  "_validation_rules": {
+    "answer_key": "String that fits grammatically and factually",
+    "max_words": "Integer 1-5, commonly 2-3 for sentence completion",
+    "prompt": "Must contain blank (_____ or clear gap) and word limit"
+  },
+  
+  "_grading": {
+    "method": "case_insensitive_exact_match",
+    "grammar_sensitive": "Answer must fit grammatically",
+    "accepts_contractions": "9pm, 9 pm, 9 p.m. all acceptable",
+    "word_limit_enforced": true
+  },
+  
+  "_sentence_patterns": [
+    "The [noun] [verb] at _____ [time period]",
+    "Students must bring _____ to the exam",
+    "The cost includes _____ but not _____",
+    "The main advantage is _____",
+    "You need to _____ before you can _____"
+  ],
+  
+  "_examples": [
+    {
+      "prompt": "The registration deadline is _____.",
+      "answer_key": "15th March",
+      "max_words": 2
+    },
+    {
+      "prompt": "Students should bring _____ to every class.", 
+      "answer_key": "notebook",
+      "max_words": 1
+    },
+    {
+      "prompt": "The course fee covers _____ and textbooks.",
+      "answer_key": "tuition", 
+      "max_words": 1
+    },
+    {
+      "prompt": "The speaker recommends visiting _____ for more information.",
+      "answer_key": "the website",
+      "max_words": 2
+    }
+  ]
+}
