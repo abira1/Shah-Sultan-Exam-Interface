@@ -1,0 +1,111 @@
+{
+  "test_type": "listening",
+  "title": "IELTS Listening Practice Test - Complete Example",
+  "description": "Complete listening test with all 10 question types demonstrated across 40 questions",
+  "duration_seconds": 2004,
+  "audio_url": "https://audio.jukehost.co.uk/sample-listening-test-complete",
+  "sections": [
+    {
+      "index": 1,
+      "title": "Section 1: Social Needs",
+      "instructions": "Questions 1-10",
+      "questions": [
+        {
+          "index": 1,
+          "type": "fill_in_the_gaps",
+          "prompt": "The student will study _____ at university.",
+          "answer_key": "engineering",
+          "max_words": 1
+        },
+        {
+          "index": 2,
+          "type": "fill_in_the_gaps_short_answers",
+          "prompt": "Complete the form:\n\nName: _____\nPhone: _____\nEmail: _____",
+          "answer_key": ["Sarah Wilson", "555-0123", "sarah@email.com"],
+          "max_words": 2
+        },
+        {
+          "index": 3,
+          "type": "form_completion",
+          "prompt": "Complete the booking form. Write NO MORE THAN THREE WORDS for each answer.",
+          "answer_key": ["David Johnson", "double room", "3 nights", "swimming pool", "credit card"],
+          "max_words": 3
+        },
+        {
+          "index": 4,
+          "type": "multiple_choice_one_answer_listening",
+          "prompt": "What is the main topic of the conversation?",
+          "answer_key": "B",
+          "options": [
+            {"value": "A", "text": "Course registration"},
+            {"value": "B", "text": "Accommodation booking"},
+            {"value": "C", "text": "Library services"},
+            {"value": "D", "text": "Sports facilities"}
+          ]
+        },
+        {
+          "index": 5,
+          "type": "sentence_completion_listening",
+          "prompt": "Complete the sentence. Write NO MORE THAN TWO WORDS.\n\nThe library closes at _____ on weekdays.",
+          "answer_key": "9 pm",
+          "max_words": 2
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "title": "Section 2: Campus Facilities",
+      "instructions": "Questions 6-15",
+      "questions": [
+        {
+          "index": 6,
+          "type": "labelling_on_a_map",
+          "prompt": "Label the campus map. Choose your answers from the box.\n\nA. Library\nB. Cafeteria\nC. Gym\nD. Student Centre\nE. Car Park",
+          "answer_key": "A",
+          "image_url": "https://example.com/campus-map.png"
+        },
+        {
+          "index": 7,
+          "type": "matching_listening",
+          "prompt": "What feature does each speaker mention?\n\nA. Modern equipment\nB. Friendly staff\nC. Convenient location\nD. Reasonable prices",
+          "answer_key": "C",
+          "features": [
+            {"value": "A", "text": "Modern equipment"},
+            {"value": "B", "text": "Friendly staff"},
+            {"value": "C", "text": "Convenient location"},
+            {"value": "D", "text": "Reasonable prices"}
+          ]
+        },
+        {
+          "index": 8,
+          "type": "multiple_choice_more_than_one_answer_listening",
+          "prompt": "Which TWO facilities does the speaker recommend?\n\nChoose TWO letters A-E.",
+          "answer_key": ["B", "D"],
+          "max_choices": 2,
+          "options": [
+            {"value": "A", "text": "Tennis courts"},
+            {"value": "B", "text": "Swimming pool"},
+            {"value": "C", "text": "Basketball court"},
+            {"value": "D", "text": "Fitness center"},
+            {"value": "E", "text": "Running track"}
+          ]
+        },
+        {
+          "index": 9,
+          "type": "table_completion_listening",
+          "prompt": "Complete the table. Write NO MORE THAN TWO WORDS for each answer.",
+          "answer_key": ["Monday", "Dr. Smith", "Room 204", "2 hours"],
+          "max_words": 2
+        },
+        {
+          "index": 10,
+          "type": "flowchart_completion_listening",
+          "prompt": "Complete the flowchart showing the enrollment process.",
+          "answer_key": ["application form", "student ID", "course selection"],
+          "max_words": 2,
+          "image_url": "https://example.com/enrollment-flowchart.png"
+        }
+      ]
+    }
+  ]
+}
